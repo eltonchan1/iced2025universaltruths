@@ -73,20 +73,21 @@ a:hover {
     const response = await fetch(url);
     const data = await response.json();
 
-    if (!data.values) return;
+    if (!data.values) {
+      document.getElementById("responseTable").innerHTML = "<tr><td>No data found</td></tr>";
+      return;
+    }
 
     const [headers, ...rows] = data.values;
-    const thead = document.querySelector("#responseTable thead");
-    const tbody = document.querySelector("#responseTable tbody");
+    let table = "<tr>" + headers.map(h => `<th>${h}</th>`).join('') + "</tr>";
+    rows.forEach(row => {
+      table += "<tr>" + headers.map((_, i) => `<td>${row[i] || ''}</td>`).join('') + "</tr>";
+    });
 
-    thead.innerHTML = "<tr>" + headers.map(h => `<th style="border:1px solid white; padding:5px;">${h}</th>`).join('') + "</tr>";
-    tbody.innerHTML = rows.map(row => 
-      `<tr>${headers.map((_, i) => `<td style="border:1px solid white; padding:5px;">${row[i] || ''}</td>`).join('')}</tr>`
-    ).join('');
+    document.getElementById("responseTable").innerHTML = table;
   }
 
   fetchData();
-  setInterval(fetchData, 10000); // Update every 10 seconds
 </script>
 <!-- ▲▲▲ End of Google Sheets Script ▲▲▲ -->
 
