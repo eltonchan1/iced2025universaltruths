@@ -58,22 +58,22 @@ a:hover {
 </table>
 <h1>Results of the Survey!</h1>
 
-<!-- ▼▼▼ Live Google Sheets Results Display ▼▼▼ -->
-<table id="responseTable" style="color:white; width: 1000px; border-collapse: collapse; margin-top: 20px;">
-  <thead></thead>
-  <tbody></tbody>
-</table>
+<div style="background-color: rgba(255, 255, 255, 0.1); padding: 20px;">
+  <h2>Live Survey Results</h2>
+  <table id="responseTable" border="1" cellpadding="8" style="color: white; background-color: rgba(0,0,0,0.6); border-collapse: collapse;"></table>
+</div>
+
 <script>
   const SHEET_ID = '1iBmJhzh4XKOxyfN8jNdtVAFqrlGccsn9UAjbeQD_UtA';
   const API_KEY = 'AIzaSyB4Kvq4D4lUtuH_Ddo1moAeB5K2FbwIMyc';
   const RANGE = 'Form Responses 1';
 
   async function fetchData() {
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`;
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent(RANGE)}?key=${API_KEY}`;
     const response = await fetch(url);
     const data = await response.json();
 
-    if (!data.values) {
+    if (!data.values || data.values.length === 0) {
       document.getElementById("responseTable").innerHTML = "<tr><td>No data found</td></tr>";
       return;
     }
@@ -89,7 +89,7 @@ a:hover {
 
   fetchData();
 </script>
-<!-- ▲▲▲ End of Google Sheets Script ▲▲▲ -->
+
 
 <table width="1200" border="0" cellspacing="0" cellpadding="0" style="margin-top: 50px;">
   <tbody>
