@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ICED 2025: Take the Survey</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 <script type="text/javascript">
 function MM_swapImgRestore() { //v3.0
   var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
@@ -13,7 +14,6 @@ function MM_preloadImages() { //v3.0
     var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
     if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
 }
-
 function MM_findObj(n, d) { //v4.01
   var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
     d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
@@ -21,101 +21,498 @@ function MM_findObj(n, d) { //v4.01
   for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
   if(!x && d.getElementById) x=d.getElementById(n); return x;
 }
-
 function MM_swapImage() { //v3.0
   var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
    if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
 }
+
+// Google Sheets configuration
+const SHEET_ID = '1iBmJhzh4XKOxyfN8jNdtVAFqrlGccsn9UAjbeQD_UtA';
+const API_KEY = 'YOUR_API_KEY_HERE'; // Replace with your actual API key
+const RANGE = 'Form Responses 1!A:N'; // Adjust if your sheet name is different
+
+let charts = {};
+
+async function fetchSheetData() {
+  try {
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    return data.values || [];
+  } catch (error) {
+    console.error('Error fetching sheet data:', error);
+    // Return sample data if API fails (for testing)
+    return getSampleData();
+  }
+}
+
+function getSampleData() {
+  // Sample data based on your sheet structure for testing
+  return [
+    ['Timestamp', 'Age', 'Job', 'Believed Friends', 'Universal Truth', 'How Know Truth', 'What is Friend', 'Glass Half', 'What is This', '1+1', 'Biggest Number', 'Favorite Color', 'Need to Survive'],
+    ['5/13/2025 10:49:55', '11-15', 'Engineering', 'Yes', 'Math', 'Scientifically proven', 'Similar interests', 'Half full', 'Smiley face', '2', 'infinity', 'blue', 'food, water, heat'],
+    ['5/13/2025 10:51:26', '11-15', 'Medical field', 'Yes', 'Big bang theory', 'Multiple perspectives', 'Respect and enjoy', 'Half full', 'Smiley face', '2', 'Infinity', 'Pink', 'Air/water/food'],
+    // Add more sample rows as needed...
+  ];
+}
+
+function processAgeData(data) {
+  const ageCounts = {};
+  
+  for (let i = 1; i < data.length; i++) {
+    const age = data[i][1];
+    if (age && age.trim()) {
+      ageCounts[age] = (ageCounts[age] || 0) + 1;
+    }
+  }
+  
+  return {
+    question: 'Age Distribution',
+    labels: Object.keys(ageCounts),
+    data: Object.values(ageCounts)
+  };
+}
+
+function processGlassData(data) {
+  const glassCounts = {};
+  
+  for (let i = 1; i < data.length; i++) {
+    const glass = data[i][7]; // Glass half full/empty column
+    if (glass && glass.trim()) {
+      glassCounts[glass] = (glassCounts[glass] || 0) + 1;
+    }
+  }
+  
+  return {
+    question: 'Is the glass half full or half empty?',
+    labels: Object.keys(glassCounts),
+    data: Object.values(glassCounts)
+  };
+}
+
+function processColorData(data) {
+  const colorCounts = {};
+  
+  for (let i = 1; i < data.length; i++) {
+    const color = data[i][11]; // Favorite color column
+    if (color && color.trim()) {
+      // Normalize color names (convert to lowercase, handle common variations)
+      let normalizedColor = color.toLowerCase().trim();
+      
+      // Group similar colors
+      if (normalizedColor.includes('blue')) normalizedColor = 'blue';
+      else if (normalizedColor.includes('red')) normalizedColor = 'red';
+      else if (normalizedColor.includes('green')) normalizedColor = 'green';
+      else if (normalizedColor.includes('purple') || normalizedColor.includes('violet')) normalizedColor = 'purple';
+      else if (normalizedColor.includes('pink')) normalizedColor = 'pink';
+      else if (normalizedColor.includes('orange')) normalizedColor = 'orange';
+      else if (normalizedColor.includes('yellow')) normalizedColor = 'yellow';
+      else if (normalizedColor.includes('black')) normalizedColor = 'black';
+      else if (normalizedColor.includes('white')) normalizedColor = 'white';
+      
+      colorCounts[normalizedColor] = (colorCounts[normalizedColor] || 0) + 1;
+    }
+  }
+  
+  return {
+    question: 'Favorite Colors',
+    labels: Object.keys(colorCounts),
+    data: Object.values(colorCounts)
+  };
+}
+
+function processBelievedFriendsData(data) {
+  const believedCounts = {};
+  
+  for (let i = 1; i < data.length; i++) {
+    const believed = data[i][3]; // Believed friends column
+    if (believed && believed.trim()) {
+      believedCounts[believed] = (believedCounts[believed] || 0) + 1;
+    }
+  }
+  
+  return {
+    question: 'Have you ever believed something just because your friends told you?',
+    labels: Object.keys(believedCounts),
+    data: Object.values(believedCounts)
+  };
+}
+
+function processMathAnswerData(data) {
+  const mathCounts = {};
+  
+  for (let i = 1; i < data.length; i++) {
+    const answer = data[i][9]; // 1+1 answer column
+    if (answer && answer.trim()) {
+      let normalizedAnswer = answer.toString().toLowerCase().trim();
+      
+      // Group similar answers
+      if (normalizedAnswer.includes('2') || normalizedAnswer === 'two') {
+        normalizedAnswer = '2';
+      } else if (normalizedAnswer.includes('3')) {
+        normalizedAnswer = '3';
+      } else if (normalizedAnswer.includes('11')) {
+        normalizedAnswer = '11';
+      } else if (normalizedAnswer.includes('67')) {
+        normalizedAnswer = '67';
+      }
+      
+      mathCounts[normalizedAnswer] = (mathCounts[normalizedAnswer] || 0) + 1;
+    }
+  }
+  
+  return {
+    question: 'What is 1+1?',
+    labels: Object.keys(mathCounts),
+    data: Object.values(mathCounts)
+  };
+}
+
+function processJobData(data) {
+  const jobCounts = {};
+  
+  for (let i = 1; i < data.length; i++) {
+    const job = data[i][2]; // Job column
+    if (job && job.trim()) {
+      let normalizedJob = job.toLowerCase().trim();
+      
+      // Group similar jobs
+      if (normalizedJob.includes('doctor') || normalizedJob.includes('medical')) {
+        normalizedJob = 'medical field';
+      } else if (normalizedJob.includes('engineer')) {
+        normalizedJob = 'engineering';
+      } else if (normalizedJob.includes('teacher')) {
+        normalizedJob = 'teaching';
+      } else if (normalizedJob.includes('artist') || normalizedJob.includes('writer')) {
+        normalizedJob = 'creative arts';
+      } else if (normalizedJob.includes('student')) {
+        normalizedJob = 'student';
+      } else {
+        normalizedJob = 'other';
+      }
+      
+      jobCounts[normalizedJob] = (jobCounts[normalizedJob] || 0) + 1;
+    }
+  }
+  
+  return {
+    question: 'Career Interests',
+    labels: Object.keys(jobCounts),
+    data: Object.values(jobCounts)
+  };
+}
+
+function createPieChart(canvas, chartData) {
+  const ctx = canvas.getContext('2d');
+  
+  return new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: chartData.labels,
+      datasets: [{
+        data: chartData.data,
+        backgroundColor: [
+          '#FF6384',
+          '#36A2EB',
+          '#FFCE56',
+          '#4BC0C0',
+          '#9966FF',
+          '#FF9F40',
+          '#FF6B6B',
+          '#4ECDC4',
+          '#45B7D1',
+          '#96CEB4'
+        ],
+        borderColor: '#ffffff',
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            color: '#ffffff',
+            font: {
+              size: 11
+            },
+            padding: 15,
+            usePointStyle: true
+          }
+        },
+        title: {
+          display: true,
+          text: chartData.question,
+          color: '#ffffff',
+          font: {
+            size: 14,
+            weight: 'bold'
+          },
+          padding: 20
+        }
+      }
+    }
+  });
+}
+
+async function updateCharts() {
+  try {
+    const data = await fetchSheetData();
+    
+    if (data.length === 0) {
+      document.getElementById('lastUpdated').textContent = 'No data available';
+      return;
+    }
+    
+    const chartDataSets = [
+      processAgeData(data),
+      processGlassData(data),
+      processColorData(data),
+      processBelievedFriendsData(data),
+      processMathAnswerData(data),
+      processJobData(data)
+    ];
+    
+    chartDataSets.forEach((chartData, index) => {
+      const canvas = document.getElementById(`chart${index + 1}`);
+      if (canvas && chartData.data.length > 0) {
+        // Destroy existing chart if it exists
+        if (charts[`chart${index + 1}`]) {
+          charts[`chart${index + 1}`].destroy();
+        }
+        
+        charts[`chart${index + 1}`] = createPieChart(canvas, chartData);
+      }
+    });
+    
+    const totalResponses = data.length - 1; // Subtract header row
+    document.getElementById('responseCount').textContent = totalResponses;
+    document.getElementById('lastUpdated').textContent = 
+      'Last updated: ' + new Date().toLocaleTimeString();
+  } catch (error) {
+    console.error('Error updating charts:', error);
+    document.getElementById('lastUpdated').textContent = 'Error loading data';
+  }
+}
+
+// Auto-refresh every 30 seconds
+function startAutoRefresh() {
+  updateCharts(); // Initial load
+  setInterval(updateCharts, 30000); // Refresh every 30 seconds
+}
 </script>
 <style type="text/css">
-h1 {
-	color: #FFFFFF;
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url('Images/backgroundig225.png');
+  background-repeat: repeat;
+  font-family: Arial, sans-serif;
 }
-h2 {
-	color: #FFFFFF;
+
+h1, h2, h3, h4, h5, h6 {
+  color: #FFFFFF;
 }
-h6 {
-	color: #FFFFFF;
+
+body, td, th, p {
+  color: #FFFFFF;
 }
-body,td,th {
-	color: #FFFFFF;
-}
-h3 {
-	color: #FFFFFF;
-}
-h4 {
-	color: #FFFFFF;
-}
-h5 {
-	color: #FFFFFF;
-}
+
 a:link {
-	color: #FFFFFF;
-	text-decoration: none;
+  color: #FFFFFF;
+  text-decoration: none;
 }
 a:visited {
-	text-decoration: none;
-	color: #FFFFFF;
+  text-decoration: none;
+  color: #FFFFFF;
 }
 a:hover {
-	text-decoration: underline;
-	color: #FFFFFF;
+  text-decoration: underline;
+  color: #FFFFFF;
 }
 a:active {
-	text-decoration: none;
-	color: #FFFFFF;
+  text-decoration: none;
+  color: #FFFFFF;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.compact-table {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.charts-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+  margin: 40px 0;
+  max-width: 1100px;
+}
+
+.chart-wrapper {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 15px;
+  padding: 20px;
+  height: 380px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chart-canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.stats-header {
+  text-align: center;
+  margin: 30px 0 20px 0;
+}
+
+.response-count {
+  font-size: 24px;
+  font-weight: bold;
+  color: #4BC0C0;
+  margin: 10px 0;
+}
+
+.update-info {
+  text-align: center;
+  margin: 10px 0 20px 0;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.api-notice {
+  background: rgba(255, 255, 0, 0.1);
+  border: 1px solid rgba(255, 255, 0, 0.3);
+  border-radius: 10px;
+  padding: 15px;
+  margin: 20px 0;
+  text-align: center;
+  color: #ffff99;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 10px;
+  }
+  
+  .charts-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .chart-wrapper {
+    height: 350px;
+  }
+  
+  .compact-table table {
+    width: 100%;
+  }
+  
+  .compact-table td {
+    display: block;
+    text-align: center;
+    padding: 10px 0;
+  }
 }
 </style>
 </head>
+<body onLoad="MM_preloadImages('Images/homeon.png','Images/abouton.png','Images/resultson.png','Images/surveyon.png'); startAutoRefresh();">
 <center>
-<body background="Images/backgroundig225.png" onLoad="MM_preloadImages('Images/homeon.png','Images/abouton.png','Images/resultson.png','Images/surveyon.png')">
-<table width="1200" border="0" cellspacing="0" cellpadding="0">
-  <tbody>
-    <tr>
-      <td height="102" colspan="6"><img src="Images/header.png" width="1200" height="100" alt=""/></td>
-    </tr>
-    <tr>
-      <td width="292" height="52">&nbsp;</td>
-      <td width="147"><a href="index.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image3','','Images/homeon.png',1)"><img src="Images/homeoff.png" alt="" width="146" height="50" id="Image3"></a></td>
-      <td width="147"><a href="about.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image7','','Images/abouton.png',1)"><img src="Images/aboutoff.png" alt="" width="146" height="50" id="Image7"></a></td>
-      <td width="146"><a href="#" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image10','','Images/surveyon.png',1)"><img src="Images/surveyoff.png" alt="" width="146" height="50" id="Image10"></a></td>
-      <td width="148"><a href="results.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image6','','Images/resultson.png',1)"><img src="Images/resultsoff.png" alt="" width="146" height="50" id="Image6"></a></td>
-      <td width="310">&nbsp;</td>
-    </tr>
-    <tr>
-      <td colspan="6"><img src="Images/hero image.png" width="1200" height="400" alt=""/></td>
-    </tr>
-  </tbody>
-</table>
-<h1>Take the Survey!</h1>
-<p><br>
-  <a href="https://forms.gle/z99DSUPFDMgFgUYT7">Take the survey using this link!</a>
-  <br>
-  <img src="Images/qr-code.png" width="300" height="300" alt=""/>
-</p>
-<table width="1200" border="0" cellspacing="0" cellpadding="0">
-  <tbody>
-    <tr>
-      <td width="200"><a href="about.html"><img src="Images/world200.png" width="200" height="200" alt=""/></a></td>
-      <td width="400"><a href="about.html">
-        <h2>About Us</h2>
-        <p>Who are we and why did we do this?</p>
-      </a></td>
-      <td width="200"><a href="results.html"><img src="Images/results200.png" width="200" height="200" alt=""/></a></td>
-      <td width="400"><a href="results.html">
-        <h2>Survey Results</h2>
-        <p>What were the results of the survey?</p>
-      </a></td>
-    </tr>
-  </tbody>
-</table>
-<p><img src="Images/footer.png" alt="" width="1200" height="157" usemap="#Map"/>
-  <map name="Map">
-    <area shape="circle" coords="498,79,27" href="https://docs.google.com/forms/d/e/1FAIpQLSc3th9ICOlK5Ob-6Y3sxbJMXkPmQHDXdZTs-3N02eBvQRNMdQ/viewform?usp=sharing&ouid=118029755189425548535" target="_blank" alt="">
-    <area shape="circle" coords="704,80,25" href="https://www.instagram.com/universaltruths.2025/" target="_blank">
-  </map>
-</p>
-<p>&nbsp;</p>
+<div class="container">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width: 1200px;">
+    <tbody>
+      <tr>
+        <td height="102" colspan="6"><img src="Images/header.png" width="100%" height="100" alt="" style="max-width: 1200px;"/></td>
+      </tr>
+      <tr>
+        <td width="24%" height="52">&nbsp;</td>
+        <td width="12%"><a href="index.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image3','','Images/homeon.png',1)"><img src="Images/homeoff.png" alt="" width="146" height="50" id="Image3"></a></td>
+        <td width="12%"><a href="about.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image7','','Images/abouton.png',1)"><img src="Images/aboutoff.png" alt="" width="146" height="50" id="Image7"></a></td>
+        <td width="12%"><a href="#" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image10','','Images/surveyon.png',1)"><img src="Images/surveyoff.png" alt="" width="146" height="50" id="Image10"></a></td>
+        <td width="12%"><a href="results.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image6','','Images/resultson.png',1)"><img src="Images/resultsoff.png" alt="" width="146" height="50" id="Image6"></a></td>
+        <td width="28%">&nbsp;</td>
+      </tr>
+      <tr>
+        <td colspan="6"><img src="Images/hero image.png" width="100%" height="400" alt="" style="max-width: 1200px;"/></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h1>Take the Survey!</h1>
+  <p><br>
+    <a href="https://forms.gle/z99DSUPFDMgFgUYT7">Take the survey using this link!</a>
+    <br>
+    <img src="Images/qr-code.png" width="300" height="300" alt=""/>
+  </p>
+
+  <!-- Live Results Section -->
+  <div class="stats-header">
+    <h2>Live Survey Results</h2>
+    <div class="response-count">
+      <span id="responseCount">Loading...</span> Total Responses
+    </div>
+    <div class="update-info">
+      <span id="lastUpdated">Loading...</span> | Auto-refreshes every 30 seconds
+    </div>
+  </div>
+  
+  <!-- API Configuration Notice -->
+  <div class="api-notice">
+    <strong>Setup Required:</strong> Replace 'YOUR_API_KEY_HERE' in the code with your Google Sheets API key to see live data.
+  </div>
+  
+  <div class="charts-container">
+    <div class="chart-wrapper">
+      <canvas id="chart1" class="chart-canvas"></canvas>
+    </div>
+    <div class="chart-wrapper">
+      <canvas id="chart2" class="chart-canvas"></canvas>
+    </div>
+    <div class="chart-wrapper">
+      <canvas id="chart3" class="chart-canvas"></canvas>
+    </div>
+    <div class="chart-wrapper">
+      <canvas id="chart4" class="chart-canvas"></canvas>
+    </div>
+    <div class="chart-wrapper">
+      <canvas id="chart5" class="chart-canvas"></canvas>
+    </div>
+    <div class="chart-wrapper">
+      <canvas id="chart6" class="chart-canvas"></canvas>
+    </div>
+  </div>
+
+  <div class="compact-table">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tbody>
+        <tr>
+          <td width="33%"><a href="about.html"><img src="Images/world200.png" width="200" height="200" alt=""/></a></td>
+          <td width="34%"><a href="about.html">
+            <h2>About Us</h2>
+            <p>Who are we and why did we do this?</p>
+          </a></td>
+          <td width="33%"><a href="results.html"><img src="Images/results200.png" width="200" height="200" alt=""/></a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><img src="Images/footer.png" alt="" width="100%" height="157" usemap="#Map" style="max-width: 1200px;"/>
+    <map name="Map">
+      <area shape="circle" coords="498,79,27" href="https://docs.google.com/forms/d/e/1FAIpQLSc3th9ICOlK5Ob-6Y3sxbJMXkPmQHDXdZTs-3N02eBvQRNMdQ/viewform?usp=sharing&ouid=118029755189425548535" target="_blank" alt="">
+      <area shape="circle" coords="704,80,25" href="https://www.instagram.com/universaltruths.2025/" target="_blank">
+    </map>
+  </p>
+  <p>&nbsp;</p>
+</div>
 </body>
 </center>
 </html>
