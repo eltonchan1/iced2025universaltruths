@@ -4,116 +4,108 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ICED 2025: Results</title>
-<script type="text/javascript">
-function MM_swapImgRestore() {
-  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=a[i].oSrc;
-}
-function MM_preloadImages() {
-  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
-    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
-    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
-}
-function MM_findObj(n, d) {
-  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
-    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
-  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
-  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
-  if(!x && d.getElementById) x=d.getElementById(n); return x;
-}
-function MM_swapImage() {
-  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array;
-  for(i=0;i<(a.length-2);i+=3)
-   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
-}
-</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style type="text/css">
 h1, h2, h3, h4, h5, h6, body, td, th, a:link, a:visited, a:active {
-	color: #FFFFFF;
+  color: #FFFFFF;
 }
 a:hover {
-	text-decoration: underline;
-	color: #FFFFFF;
+  text-decoration: underline;
+  color: #FFFFFF;
 }
 </style>
 </head>
 <center>
-<body background="Images/backgroundig225.png" onLoad="MM_preloadImages('Images/homeon.png','Images/abouton.png','Images/resultson.png','Images/surveyon.png')">
-<table width="1200" border="0" cellspacing="0" cellpadding="0">
-  <tbody>
-    <tr>
-      <td height="102" colspan="6"><img src="Images/header.png" width="1200" height="100" alt=""/></td>
-    </tr>
-    <tr>
-      <td width="292" height="52">&nbsp;</td>
-      <td width="147"><a href="index.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image3','','Images/homeon.png',1)"><img src="Images/homeoff.png" alt="" width="146" height="50" id="Image3"></a></td>
-      <td width="147"><a href="about.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image7','','Images/abouton.png',1)"><img src="Images/aboutoff.png" alt="" width="146" height="50" id="Image7"></a></td>
-      <td width="146"><a href="survey.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image10','','Images/surveyon.png',1)"><img src="Images/surveyoff.png" alt="" width="146" height="50" id="Image10"></a></td>
-      <td width="148"><a href="#" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image6','','Images/resultson.png',1)"><img src="Images/resultsoff.png" alt="" width="146" height="50" id="Image6"></a></td>
-      <td width="310">&nbsp;</td>
-    </tr>
-    <tr>
-      <td colspan="6"><img src="Images/hero image.png" width="1200" height="400" alt=""/></td>
-    </tr>
-  </tbody>
+<body background="Images/backgroundig225.png">
+<table width="1200">
+  <tr><td colspan="6"><img src="Images/header.png" width="1200" height="100"></td></tr>
+  <tr>
+    <td width="292"></td>
+    <td><a href="index.html"><img src="Images/homeoff.png" width="146" height="50"></a></td>
+    <td><a href="about.html"><img src="Images/aboutoff.png" width="146" height="50"></a></td>
+    <td><a href="survey.html"><img src="Images/surveyoff.png" width="146" height="50"></a></td>
+    <td><a href="#"><img src="Images/resultsoff.png" width="146" height="50"></a></td>
+    <td width="310"></td>
+  </tr>
+  <tr><td colspan="6"><img src="Images/hero image.png" width="1200" height="400"></td></tr>
 </table>
 <h1>Results of the Survey!</h1>
-
-<div style="background-color: rgba(255, 255, 255, 0.1); padding: 20px;">
-  <h2>Live Survey Results</h2>
-  <table id="responseTable" border="1" cellpadding="8" style="color: white; background-color: rgba(0,0,0,0.6); border-collapse: collapse;"></table>
-</div>
-
+<h3 id="responseCount"></h3>
+<div id="chartsContainer" style="max-width: 1000px; margin: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;"></div>
 <script>
-  const SHEET_ID = '1iBmJhzh4XKOxyfN8jNdtVAFqrlGccsn9UAjbeQD_UtA';
-  const API_KEY = 'AIzaSyB4Kvq4D4lUtuH_Ddo1moAeB5K2FbwIMyc';
-  const RANGE = 'Form Responses 1';
+const SHEET_ID = '1iBmJhzh4XKOxyfN8jNdtVAFqrlGccsn9UAjbeQD_UtA';
+const API_KEY = 'AIzaSyB4Kvq4D4lUtuH_Ddo1moAeB5K2FbwIMyc';
+const RANGE = 'Form Responses 1';
 
-  async function fetchData() {
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent(RANGE)}?key=${API_KEY}`;
-    const response = await fetch(url);
-    const data = await response.json();
+async function fetchData() {
+  const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent(RANGE)}?key=${API_KEY}`;
+  const res = await fetch(url);
+  const data = await res.json();
 
-    if (!data.values || data.values.length === 0) {
-      document.getElementById("responseTable").innerHTML = "<tr><td>No data found</td></tr>";
-      return;
-    }
-
-    const [headers, ...rows] = data.values;
-    let table = "<tr>" + headers.map(h => `<th>${h}</th>`).join('') + "</tr>";
-    rows.forEach(row => {
-      table += "<tr>" + headers.map((_, i) => `<td>${row[i] || ''}</td>`).join('') + "</tr>";
-    });
-
-    document.getElementById("responseTable").innerHTML = table;
+  if (!data.values || data.values.length <= 1) {
+    document.getElementById("chartsContainer").innerHTML = "<p>No data found</p>";
+    return;
   }
 
-  fetchData();
+  const [headers, ...rows] = data.values;
+  const chartsContainer = document.getElementById("chartsContainer");
+  document.getElementById("responseCount").textContent = `${rows.length} people have filled out the survey.`;
+
+  for (let col = 1; col < headers.length; col++) {
+    const counts = {};
+    for (let row of rows) {
+      const answer = row[col] || "(Blank)";
+      counts[answer] = (counts[answer] || 0) + 1;
+    }
+    const canvas = document.createElement('canvas');
+    canvas.width = 300;
+    canvas.height = 300;
+    chartsContainer.appendChild(canvas);
+    new Chart(canvas.getContext('2d'), {
+      type: 'pie',
+      data: {
+        labels: Object.keys(counts),
+        datasets: [{
+          data: Object.values(counts),
+          backgroundColor: [
+            '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#66FF66', '#FF6666'
+          ]
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: headers[col],
+            color: '#FFFFFF'
+          },
+          legend: {
+            labels: {
+              color: '#FFFFFF'
+            }
+          }
+        }
+      }
+    });
+  }
+}
+
+fetchData();
 </script>
-
-
-<table width="1200" border="0" cellspacing="0" cellpadding="0" style="margin-top: 50px;">
-  <tbody>
-    <tr>
-      <td width="200"><a href="about.html"><img src="Images/world200.png" width="200" height="200" alt=""/></a></td>
-      <td width="400"><a href="about.html">
-        <h2>About Us</h2>
-        <p>Who are we and why did we do this?</p>
-      </a></td>
-      <td width="200"><a href="survey.html"><img src="Images/survey200.png" width="200" height="200" alt=""/></a></td>
-      <td width="400"><a href="survey.html">
-        <h2>Take the Survey</h2>
-        <p>Take our survey to help support our research!</p>
-      </a></td>
-    </tr>
-  </tbody>
+<table width="1200" style="margin-top: 50px;">
+  <tr>
+    <td width="200"><a href="about.html"><img src="Images/world200.png" width="200" height="200"></a></td>
+    <td width="400"><a href="about.html"><h2>About Us</h2><p>Who are we and why did we do this?</p></a></td>
+    <td width="200"><a href="survey.html"><img src="Images/survey200.png" width="200" height="200"></a></td>
+    <td width="400"><a href="survey.html"><h2>Take the Survey</h2><p>Take our survey to help support our research!</p></a></td>
+  </tr>
 </table>
-<p><img src="Images/footer.png" alt="" width="1200" height="157" usemap="#Map"/>
-  <map name="Map">
-    <area shape="circle" coords="498,79,27" href="https://docs.google.com/forms/d/e/1FAIpQLSc3th9ICOlK5Ob-6Y3sxbJMXkPmQHDXdZTs-3N02eBvQRNMdQ/viewform?usp=sharing&ouid=118029755189425548535" target="_blank" alt="">
-    <area shape="circle" coords="704,80,25" href="https://www.instagram.com/universaltruths.2025/" target="_blank">
-  </map>
-</p>
-<p>&nbsp;</p>
+<p><img src="Images/footer.png" width="1200" height="157" usemap="#Map">
+<map name="Map">
+  <area shape="circle" coords="498,79,27" href="https://docs.google.com/forms/d/e/1FAIpQLSc3th9ICOlK5Ob-6Y3sxbJMXkPmQHDXdZTs-3N02eBvQRNMdQ/viewform" target="_blank">
+  <area shape="circle" coords="704,80,25" href="https://www.instagram.com/universaltruths.2025/" target="_blank">
+</map></p>
 </body>
 </center>
 </html>
