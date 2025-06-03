@@ -9,80 +9,74 @@
     body {
       background-image: url('Images/backgroundig225.png');
       background-size: cover;
-      color: #FFFFFF;
-      font-family: sans-serif;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
       margin: 0;
-      padding: 0;
-    }
-
-    h1, h2, h3, h4, h5, h6, td, th, a {
+      font-family: sans-serif;
       color: #FFFFFF;
     }
 
     a {
+      color: #FFFFFF;
       text-decoration: none;
     }
 
     a:hover {
       text-decoration: underline;
-      color: #FFFFFF;
     }
 
-    .container {
+    header, footer {
       max-width: 1200px;
       margin: auto;
-      padding: 10px;
+      text-align: center;
     }
 
-    .nav-bar, .footer-bar {
+    .nav {
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
+      flex-wrap: wrap;
       gap: 10px;
-      margin: 20px 0;
+      margin: 10px 0;
     }
 
-    .nav-bar img, .footer-bar img {
+    .nav img {
       width: 146px;
       height: 50px;
     }
 
-    .section {
-      text-align: center;
-      margin: 30px 0;
-    }
-
-    .hero-img, .header-img, .footer-img {
-      display: block;
-      margin: auto;
+    .hero img {
       width: 100%;
       max-width: 1200px;
       height: auto;
+      display: block;
+      margin: auto;
     }
 
-    .footer-links {
-      margin-top: 50px;
-    }
-
-    .info-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 40px;
-    }
-
-    .info-card {
-      max-width: 400px;
+    h1, h2, h3 {
       text-align: center;
     }
 
-    .info-card img {
-      width: 200px;
-      height: 200px;
+    .section-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      max-width: 1200px;
+      margin: 40px auto;
     }
 
-    #chartsContainer {
+    .section-links a {
+      text-align: center;
+      max-width: 200px;
+    }
+
+    .section-links img {
+      width: 100%;
+      max-width: 200px;
+      height: auto;
+    }
+
+    .charts-container {
       max-width: 1000px;
       margin: auto;
       display: flex;
@@ -90,52 +84,54 @@
       justify-content: center;
       gap: 30px;
     }
+
+    footer img {
+      width: 100%;
+      max-width: 1200px;
+      height: auto;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <img src="Images/header.png" class="header-img" alt="Header Image">
-
-    <div class="nav-bar">
+  <header>
+    <img src="Images/header.png" alt="Header" width="1200" height="100">
+    <nav class="nav">
       <a href="index.html"><img src="Images/homeoff.png" alt="Home"></a>
       <a href="about.html"><img src="Images/aboutoff.png" alt="About"></a>
       <a href="survey.html"><img src="Images/surveyoff.png" alt="Survey"></a>
       <a href="#"><img src="Images/resultsoff.png" alt="Results"></a>
-    </div>
+    </nav>
+  </header>
 
-    <img src="Images/hero image.png" class="hero-img" alt="Hero Image">
-
-    <div class="section">
-      <h1>Results of the Survey!</h1>
-      <h3 id="responseCount"></h3>
-      <div id="chartsContainer"></div>
-    </div>
-
-    <div class="info-row">
-      <div class="info-card">
-        <a href="about.html">
-          <img src="Images/world200.png" alt="About Us">
-          <h2>About Us</h2>
-          <p>Who are we and why did we do this?</p>
-        </a>
-      </div>
-      <div class="info-card">
-        <a href="survey.html">
-          <img src="Images/survey200.png" alt="Take the Survey">
-          <h2>Take the Survey</h2>
-          <p>Take our survey to help support our research!</p>
-        </a>
-      </div>
-    </div>
-
-    <div class="footer-links">
-      <img src="Images/footer.png" class="footer-img" usemap="#Map" alt="Footer">
-      <map name="Map">
-        <area shape="circle" coords="498,79,27" href="https://docs.google.com/forms/d/e/1FAIpQLSc3th9ICOlK5Ob-6Y3sxbJMXkPmQHDXdZTs-3N02eBvQRNMdQ/viewform" target="_blank" alt="Form">
-        <area shape="circle" coords="704,80,25" href="https://www.instagram.com/universaltruths.2025/" target="_blank" alt="Instagram">
-      </map>
-    </div>
+  <div class="hero">
+    <img src="Images/hero image.png" alt="Hero">
   </div>
+
+  <h1>Results of the Survey!</h1>
+  <h3 id="responseCount"></h3>
+
+  <div id="chartsContainer" class="charts-container"></div>
+
+  <div class="section-links">
+    <a href="about.html">
+      <img src="Images/world200.png" alt="About Us">
+      <h2>About Us</h2>
+      <p>Who are we and why did we do this?</p>
+    </a>
+    <a href="survey.html">
+      <img src="Images/survey200.png" alt="Survey">
+      <h2>Take the Survey</h2>
+      <p>Take our survey to help support our research!</p>
+    </a>
+  </div>
+
+  <footer>
+    <img src="Images/footer.png" alt="Footer" usemap="#Map">
+    <map name="Map">
+      <area shape="circle" coords="498,79,27" href="https://docs.google.com/forms/d/e/1FAIpQLSc3th9ICOlK5Ob-6Y3sxbJMXkPmQHDXdZTs-3N02eBvQRNMdQ/viewform" target="_blank">
+      <area shape="circle" coords="704,80,25" href="https://www.instagram.com/universaltruths.2025/" target="_blank">
+    </map>
+  </footer>
 
   <script>
     const SHEET_ID = '1iBmJhzh4XKOxyfN8jNdtVAFqrlGccsn9UAjbeQD_UtA';
@@ -155,6 +151,8 @@
       const [headers, ...rows] = data.values;
       document.getElementById("responseCount").textContent = `${rows.length} people have filled out the survey.`;
 
+      const chartsContainer = document.getElementById("chartsContainer");
+
       for (let col = 1; col < headers.length; col++) {
         const counts = {};
         for (let row of rows) {
@@ -165,7 +163,7 @@
         const canvas = document.createElement('canvas');
         canvas.width = 300;
         canvas.height = 300;
-        document.getElementById("chartsContainer").appendChild(canvas);
+        chartsContainer.appendChild(canvas);
 
         new Chart(canvas.getContext('2d'), {
           type: 'pie',
