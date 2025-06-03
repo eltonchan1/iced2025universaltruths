@@ -68,6 +68,19 @@ img.responsive {
   height: 50px;
   object-fit: contain;
 }
+.nav-table {
+  width: 100%;
+  border-spacing: 0;
+}
+.nav-table td {
+  padding: 0 5px;
+}
+.nav-table img {
+  width: 146px;
+  height: 50px;
+  max-width: 100%;
+  height: auto;
+}
 @media (max-width: 768px) {
   .nav a img {
     width: 100px;
@@ -103,7 +116,7 @@ footer {
 <body onLoad="MM_preloadImages('Images/homeon.png','Images/abouton.png','Images/resultson.png','Images/surveyon.png')">
 <div class="container">
   <img src="Images/header.png" alt="Header" class="responsive">
-  <div class="nav">
+  <div class="nav-table">
     <a href="#" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image3','','Images/homeon.png',1)"><img src="Images/homeoff.png" id="Image3" alt=""></a>
     <a href="about.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image7','','Images/abouton.png',1)"><img src="Images/aboutoff.png" id="Image7" alt=""></a>
     <a href="survey.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image10','','Images/surveyon.png',1)"><img src="Images/surveyoff.png" id="Image10" alt=""></a>
