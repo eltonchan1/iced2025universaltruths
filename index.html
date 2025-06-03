@@ -14,6 +14,7 @@
   }
   h1, h2, h3, h4, h5, h6, td, th, a {
     color: #FFFFFF;
+    text-align: center;
   }
   a:link, a:visited {
     text-decoration: none;
@@ -37,22 +38,27 @@
   .nav a img {
     width: 146px;
     height: 50px;
+    object-fit: contain;
   }
   .hero {
     width: 100%;
     max-width: 1200px;
+    height: auto;
   }
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    align-items: center;
-    justify-items: center;
-    padding: 20px 0;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 40px 0;
   }
-  .grid img {
+  .grid-item {
+    text-align: center;
+  }
+  .grid-item img {
     width: 200px;
     height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
   }
   .footer {
     text-align: center;
@@ -79,21 +85,21 @@
     <h1>ICED 2025: Universal Truths</h1>
 
     <div class="grid">
-      <div>
+      <div class="grid-item">
         <a href="about.html"><img src="Images/world200.png" alt=""></a>
         <a href="about.html">
           <h2>About Us</h2>
           <p>Who are we and why did we do this?</p>
         </a>
       </div>
-      <div>
+      <div class="grid-item">
         <a href="survey.html"><img src="Images/survey200.png" alt=""></a>
         <a href="survey.html">
           <h2>Take the Survey</h2>
           <p>Take our survey to help support our research!</p>
         </a>
       </div>
-      <div>
+      <div class="grid-item">
         <a href="results.html"><img src="Images/results200.png" alt=""></a>
         <a href="results.html">
           <h2>Survey Results</h2>
