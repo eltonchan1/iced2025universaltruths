@@ -1,111 +1,161 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ICED 2025: Results</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<style type="text/css">
-h1, h2, h3, h4, h5, h6, body, td, th, a:link, a:visited, a:active {
-  color: #FFFFFF;
-}
-a:hover {
-  text-decoration: underline;
-  color: #FFFFFF;
-}
-</style>
-</head>
-<center>
-<body background="Images/backgroundig225.png">
-<table width="1200">
-  <tr><td colspan="6"><img src="Images/header.png" width="1200" height="100"></td></tr>
-  <tr>
-    <td width="292"></td>
-    <td><a href="index.html"><img src="Images/homeoff.png" width="146" height="50"></a></td>
-    <td><a href="about.html"><img src="Images/aboutoff.png" width="146" height="50"></a></td>
-    <td><a href="survey.html"><img src="Images/surveyoff.png" width="146" height="50"></a></td>
-    <td><a href="#"><img src="Images/resultsoff.png" width="146" height="50"></a></td>
-    <td width="310"></td>
-  </tr>
-  <tr><td colspan="6"><img src="Images/hero image.png" width="1200" height="400"></td></tr>
-</table>
-<h1>Results of the Survey!</h1>
-<h3 id="responseCount"></h3>
-<div id="chartsContainer" style="max-width: 1000px; margin: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;"></div>
-<script>
-const SHEET_ID = '1iBmJhzh4XKOxyfN8jNdtVAFqrlGccsn9UAjbeQD_UtA';
-const API_KEY = 'AIzaSyB4Kvq4D4lUtuH_Ddo1moAeB5K2FbwIMyc';
-const RANGE = 'Form Responses 1';
-
-async function fetchData() {
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent(RANGE)}?key=${API_KEY}`;
-  const res = await fetch(url);
-  const data = await res.json();
-
-  if (!data.values || data.values.length <= 1) {
-    document.getElementById("chartsContainer").innerHTML = "<p>No data found</p>";
-    return;
-  }
-
-  const [headers, ...rows] = data.values;
-  const chartsContainer = document.getElementById("chartsContainer");
-  document.getElementById("responseCount").textContent = `${rows.length} people have filled out the survey.`;
-
-  for (let col = 1; col < headers.length; col++) {
-    const counts = {};
-    for (let row of rows) {
-      const answer = row[col] || "(Blank)";
-      counts[answer] = (counts[answer] || 0) + 1;
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ICED 2025: Results</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      background-image: url('Images/backgroundig225.png');
+      background-size: cover;
+      font-family: sans-serif;
+      color: #FFFFFF;
+      margin: 0;
     }
-    const canvas = document.createElement('canvas');
-    canvas.width = 300;
-    canvas.height = 300;
-    chartsContainer.appendChild(canvas);
-    new Chart(canvas.getContext('2d'), {
-      type: 'pie',
-      data: {
-        labels: Object.keys(counts),
-        datasets: [{
-          data: Object.values(counts),
-          backgroundColor: [
-            '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#66FF66', '#FF6666'
-          ]
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          title: {
-            display: true,
-            text: headers[col],
-            color: '#FFFFFF'
+
+    h1, h2, h3, h4, h5, h6, a {
+      color: #FFFFFF;
+      text-align: center;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      padding: 10px 0;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    nav a img {
+      width: 146px;
+      height: 50px;
+    }
+
+    #chartsContainer {
+      max-width: 1000px;
+      margin: 40px auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    table.content {
+      width: 100%;
+      max-width: 1200px;
+      margin: 50px auto;
+      text-align: center;
+    }
+
+    .footer-image {
+      display: block;
+      margin: 40px auto;
+    }
+  </style>
+</head>
+<body>
+  <img src="Images/header.png" width="100%" height="100" alt="Header Image">
+
+  <!-- Updated Top Menu -->
+  <nav>
+    <a href="index.html"><img src="Images/homeoff.png" alt="Home"></a>
+    <a href="about.html"><img src="Images/aboutoff.png" alt="About"></a>
+    <a href="survey.html"><img src="Images/surveyoff.png" alt="Survey"></a>
+    <a href="#"><img src="Images/resultsoff.png" alt="Results"></a>
+  </nav>
+
+  <img src="Images/hero image.png" width="100%" height="400" alt="Hero Image">
+
+  <h1>Results of the Survey!</h1>
+  <h3 id="responseCount"></h3>
+  <div id="chartsContainer"></div>
+
+  <script>
+    const SHEET_ID = '1iBmJhzh4XKOxyfN8jNdtVAFqrlGccsn9UAjbeQD_UtA';
+    const API_KEY = 'AIzaSyB4Kvq4D4lUtuH_Ddo1moAeB5K2FbwIMyc';
+    const RANGE = 'Form Responses 1';
+
+    async function fetchData() {
+      const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent(RANGE)}?key=${API_KEY}`;
+      const res = await fetch(url);
+      const data = await res.json();
+
+      if (!data.values || data.values.length <= 1) {
+        document.getElementById("chartsContainer").innerHTML = "<p>No data found</p>";
+        return;
+      }
+
+      const [headers, ...rows] = data.values;
+      const chartsContainer = document.getElementById("chartsContainer");
+      document.getElementById("responseCount").textContent = `${rows.length} people have filled out the survey.`;
+
+      for (let col = 1; col < headers.length; col++) {
+        const counts = {};
+        for (let row of rows) {
+          const answer = row[col] || "(Blank)";
+          counts[answer] = (counts[answer] || 0) + 1;
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = 300;
+        canvas.height = 300;
+        chartsContainer.appendChild(canvas);
+        new Chart(canvas.getContext('2d'), {
+          type: 'pie',
+          data: {
+            labels: Object.keys(counts),
+            datasets: [{
+              data: Object.values(counts),
+              backgroundColor: [
+                '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0',
+                '#9966FF', '#FF9F40', '#66FF66', '#FF6666'
+              ]
+            }]
           },
-          legend: {
-            labels: {
-              color: '#FFFFFF'
+          options: {
+            responsive: true,
+            plugins: {
+              title: {
+                display: true,
+                text: headers[col],
+                color: '#FFFFFF'
+              },
+              legend: {
+                labels: {
+                  color: '#FFFFFF'
+                }
+              }
             }
           }
-        }
+        });
       }
-    });
-  }
-}
+    }
 
-fetchData();
-</script>
-<table width="1200" style="margin-top: 50px;">
-  <tr>
-    <td width="200"><a href="about.html"><img src="Images/world200.png" width="200" height="200"></a></td>
-    <td width="400"><a href="about.html"><h2>About Us</h2><p>Who are we and why did we do this?</p></a></td>
-    <td width="200"><a href="survey.html"><img src="Images/survey200.png" width="200" height="200"></a></td>
-    <td width="400"><a href="survey.html"><h2>Take the Survey</h2><p>Take our survey to help support our research!</p></a></td>
-  </tr>
-</table>
-<p><img src="Images/footer.png" width="1200" height="157" usemap="#Map">
-<map name="Map">
-  <area shape="circle" coords="498,79,27" href="https://docs.google.com/forms/d/e/1FAIpQLSc3th9ICOlK5Ob-6Y3sxbJMXkPmQHDXdZTs-3N02eBvQRNMdQ/viewform" target="_blank">
-  <area shape="circle" coords="704,80,25" href="https://www.instagram.com/universaltruths.2025/" target="_blank">
-</map></p>
+    fetchData();
+  </script>
+
+  <table class="content">
+    <tr>
+      <td><a href="about.html"><img src="Images/world200.png" width="200" height="200"></a></td>
+      <td><a href="about.html"><h2>About Us</h2><p>Who are we and why did we do this?</p></a></td>
+      <td><a href="survey.html"><img src="Images/survey200.png" width="200" height="200"></a></td>
+      <td><a href="survey.html"><h2>Take the Survey</h2><p>Take our survey to help support our research!</p></a></td>
+    </tr>
+  </table>
+
+  <img class="footer-image" src="Images/footer.png" width="1200" height="157" usemap="#Map" alt="Footer">
+  <map name="Map">
+    <area shape="circle" coords="498,79,27" href="https://docs.google.com/forms/d/e/1FAIpQLSc3th9ICOlK5Ob-6Y3sxbJMXkPmQHDXdZTs-3N02eBvQRNMdQ/viewform" target="_blank">
+    <area shape="circle" coords="704,80,25" href="https://www.instagram.com/universaltruths.2025/" target="_blank">
+  </map>
 </body>
-</center>
 </html>
