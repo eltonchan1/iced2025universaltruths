@@ -5,126 +5,135 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ICED 2025: About Us</title>
 <script type="text/javascript">
-function MM_swapImgRestore() { //v3.0
+function MM_swapImgRestore() {
   var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
 }
-function MM_preloadImages() { //v3.0
+function MM_preloadImages() {
   var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
     var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
     if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
 }
-
-function MM_findObj(n, d) { //v4.01
+function MM_findObj(n, d) {
   var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
     d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
   if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
   for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
   if(!x && d.getElementById) x=d.getElementById(n); return x;
 }
-
-function MM_swapImage() { //v3.0
+function MM_swapImage() {
   var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
    if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
 }
 </script>
-<style type="text/css">
-h1 {
-	color: #FFFFFF;
+<style>
+body {
+  color: #FFFFFF;
+  background-image: url('Images/backgroundig225.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  text-align: center;
 }
-h2 {
-	color: #FFFFFF;
+h1, h2, h3, h4, h5, h6, p, a {
+  color: #FFFFFF;
 }
-h6 {
-	color: #FFFFFF;
-}
-body,td,th {
-	color: #FFFFFF;
-}
-h3 {
-	color: #FFFFFF;
-}
-h4 {
-	color: #FFFFFF;
-}
-h5 {
-	color: #FFFFFF;
-}
-a:link {
-	color: #FFFFFF;
-	text-decoration: none;
-}
-a:visited {
-	color: #FFFFFF;
-	text-decoration: none;
+a {
+  text-decoration: none;
 }
 a:hover {
-	color: #FFFFFF;
-	text-decoration: underline;
+  text-decoration: underline;
 }
-a:active {
-	color: #FFFFFF;
-	text-decoration: none;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+img.responsive {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.nav-table, .content-table {
+  width: 100%;
+  border-spacing: 0;
+}
+.nav-table img, .content-table img {
+  width: 100%;
+  height: auto;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  align-items: center;
+  justify-items: center;
+  margin: 40px 0;
+}
+.grid-item img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.grid-item h2 {
+  margin: 10px 0 5px;
+}
+.grid-item p {
+  margin: 0;
+  padding: 0 10px;
+}
+footer {
+  margin-top: 40px;
 }
 </style>
 </head>
-<center>
-<body background="Images/backgroundig225.png" onLoad="MM_preloadImages('Images/homeon.png','Images/abouton.png','Images/resultson.png','Images/surveyon.png')">
-<table width="1200" border="0" cellspacing="0" cellpadding="0">
-  <tbody>
+<body onLoad="MM_preloadImages('Images/homeon.png','Images/abouton.png','Images/resultson.png','Images/surveyon.png')">
+<div class="container">
+  <img src="Images/header.png" alt="Header" class="responsive">
+  <table class="nav-table">
     <tr>
-      <td height="102" colspan="6"><img src="Images/header.png" width="1200" height="100" alt=""/></td>
+      <td><a href="index.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image3','','Images/homeon.png',1)"><img src="Images/homeoff.png" alt="Home" id="Image3"></a></td>
+      <td><a href="#" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image7','','Images/abouton.png',1)"><img src="Images/aboutoff.png" alt="About" id="Image7"></a></td>
+      <td><a href="survey.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image10','','Images/surveyon.png',1)"><img src="Images/surveyoff.png" alt="Survey" id="Image10"></a></td>
+      <td><a href="results.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image6','','Images/resultson.png',1)"><img src="Images/resultsoff.png" alt="Results" id="Image6"></a></td>
     </tr>
-    <tr>
-      <td width="292" height="52">&nbsp;</td>
-      <td width="147"><a href="index.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image3','','Images/homeon.png',1)"><img src="Images/homeoff.png" alt="" width="146" height="50" id="Image3"></a></td>
-      <td width="147"><a href="#" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image7','','Images/abouton.png',1)"><img src="Images/aboutoff.png" alt="" width="146" height="50" id="Image7"></a></td>
-      <td width="146"><a href="survey.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image10','','Images/surveyon.png',1)"><img src="Images/surveyoff.png" alt="" width="146" height="50" id="Image10"></a></td>
-      <td width="148"><a href="results.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image6','','Images/resultson.png',1)"><img src="Images/resultsoff.png" alt="" width="146" height="50" id="Image6"></a></td>
-      <td width="310">&nbsp;</td>
-    </tr>
-    <tr>
-      <td colspan="6"><img src="Images/hero image.png" width="1200" height="400" alt=""/></td>
-    </tr>
-  </tbody>
-</table>
-<h1>About Us: Why Did We Do This?</h1>
-<p><br>
-  We are a group of students from Sir Winston Churchill Secondary working on a project called I.C.E.D. (Initiate, Coalesce, Express, Do). 
-  <br>
-  Each group comes up with an open ended question and attempts to answer it. 
-  <br>
-  Our question is: "How can we move beyond our own perspectives to discover a universal truth?" 
-  <br>
-  For our "Do" component we created a survey to try and see if there even is a universal truth. 
-  <br>
-  This website was made to share our survey as well as the results of it. 
-  <br>
-  Thank you to everyone that completed the survey and we hope you learn something new from our results!
-<br>
-</p>
-<table width="1200" border="0" cellspacing="0" cellpadding="0">
-  <tbody>
-    <tr>
-      <td width="200"><a href="survey.html"><img src="Images/survey200.png" width="200" height="200" alt=""/></a></td>
-      <td width="400"><a href="survey.html">
+  </table>
+  <img src="Images/hero image.png" alt="Hero Image" class="responsive">
+  <h1>About Us: Why Did We Do This?</h1>
+  <p>
+    We are a group of students from Sir Winston Churchill Secondary working on a project called I.C.E.D. (Initiate, Coalesce, Express, Do).<br>
+    Each group comes up with an open ended question and attempts to answer it.<br>
+    Our question is: "How can we move beyond our own perspectives to discover a universal truth?"<br>
+    For our "Do" component we created a survey to try and see if there even is a universal truth.<br>
+    This website was made to share our survey as well as the results of it.<br>
+    Thank you to everyone that completed the survey and we hope you learn something new from our results!
+  </p>
+  <div class="grid">
+    <div class="grid-item">
+      <a href="survey.html"><img src="Images/survey200.png" alt="Survey"></a>
+      <a href="survey.html">
         <h2>Take the Survey</h2>
         <p>Take our survey to help support our research!</p>
-      </a></td>
-      <td width="200"><a href="survey.html"><img src="Images/results200.png" width="200" height="200" alt=""/></a></td>
-      <td width="400"><a href="survey.html">
+      </a>
+    </div>
+    <div class="grid-item">
+      <a href="survey.html"><img src="Images/results200.png" alt="Results"></a>
+      <a href="survey.html">
         <h2>Survey Results</h2>
         <p>What were the results of the survey?</p>
-      </a></td>
-    </tr>
-  </tbody>
-</table>
-<p><img src="Images/footer.png" alt="" width="1200" height="157" usemap="#Map"/>
-  <map name="Map">
-    <area shape="circle" coords="498,79,27" href="https://docs.google.com/forms/d/e/1FAIpQLSc3th9ICOlK5Ob-6Y3sxbJMXkPmQHDXdZTs-3N02eBvQRNMdQ/viewform?usp=sharing&ouid=118029755189425548535" target="_blank" alt="">
-    <area shape="circle" coords="704,80,25" href="https://www.instagram.com/universaltruths.2025/" target="_blank">
-  </map>
-</p>
-<p>&nbsp;</p>
+      </a>
+    </div>
+  </div>
+  <footer>
+    <img src="Images/footer.png" alt="Footer" class="responsive" usemap="#Map">
+    <map name="Map">
+      <area shape="circle" coords="498,79,27" href="https://docs.google.com/forms/d/e/1FAIpQLSc3th9ICOlK5Ob-6Y3sxbJMXkPmQHDXdZTs-3N02eBvQRNMdQ/viewform?usp=sharing&ouid=118029755189425548535" target="_blank" alt="Survey">
+      <area shape="circle" coords="704,80,25" href="https://www.instagram.com/universaltruths.2025/" target="_blank" alt="Instagram">
+    </map>
+  </footer>
+</div>
 </body>
-</center>
 </html>
