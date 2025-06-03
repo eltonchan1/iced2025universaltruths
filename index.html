@@ -4,118 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ICED 2025: Universal Truths</title>
-<style>
-  body {
-    color: #FFFFFF;
-    margin: 0;
-    font-family: sans-serif;
-    background: url('Images/backgroundig225.png') no-repeat center center fixed;
-    background-size: cover;
-  }
-  h1, h2, h3, h4, h5, h6, td, th, a {
-    color: #FFFFFF;
-    text-align: center;
-  }
-  a:link, a:visited {
-    text-decoration: none;
-    color: #FFFFFF;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-  .nav {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 20px 0;
-  }
-  .nav a img {
-    width: 146px;
-    height: 50px;
-    object-fit: contain;
-  }
-  .hero {
-    width: 100%;
-    max-width: 1200px;
-    height: auto;
-  }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    padding: 40px 0;
-  }
-  .grid-item {
-    text-align: center;
-  }
-  .grid-item img {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
-  }
-  .footer {
-    text-align: center;
-    margin-top: 40px;
-  }
-  .footer img {
-    max-width: 100%;
-    height: auto;
-  }
-</style>
-</head>
-<body onLoad="MM_preloadImages('Images/homeon.png','Images/abouton.png','Images/resultson.png','Images/surveyon.png')">
-  <div class="container">
-    <img src="Images/header.png" width="1200" height="100" alt="" class="hero">
-
-    <div class="nav">
-      <a href="#" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image3','','Images/homeon.png',1)"><img src="Images/homeoff.png" id="Image3" alt=""></a>
-      <a href="about.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image7','','Images/abouton.png',1)"><img src="Images/aboutoff.png" id="Image7" alt=""></a>
-      <a href="survey.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image10','','Images/surveyon.png',1)"><img src="Images/surveyoff.png" id="Image10" alt=""></a>
-      <a href="results.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image6','','Images/resultson.png',1)"><img src="Images/resultsoff.png" id="Image6" alt=""></a>
-    </div>
-
-    <img src="Images/hero image.png" width="1200" height="400" alt="" class="hero">
-    <h1>ICED 2025: Universal Truths</h1>
-
-    <div class="grid">
-      <div class="grid-item">
-        <a href="about.html"><img src="Images/world200.png" alt=""></a>
-        <a href="about.html">
-          <h2>About Us</h2>
-          <p>Who are we and why did we do this?</p>
-        </a>
-      </div>
-      <div class="grid-item">
-        <a href="survey.html"><img src="Images/survey200.png" alt=""></a>
-        <a href="survey.html">
-          <h2>Take the Survey</h2>
-          <p>Take our survey to help support our research!</p>
-        </a>
-      </div>
-      <div class="grid-item">
-        <a href="results.html"><img src="Images/results200.png" alt=""></a>
-        <a href="results.html">
-          <h2>Survey Results</h2>
-          <p>What were the results of the survey?</p>
-        </a>
-      </div>
-    </div>
-
-    <div class="footer">
-      <img src="Images/footer.png" alt="" usemap="#Map">
-      <map name="Map">
-        <area shape="circle" coords="498,79,27" href="https://docs.google.com/forms/d/e/1FAIpQLSc3th9ICOlK5Ob-6Y3sxbJMXkPmQHDXdZTs-3N02eBvQRNMdQ/viewform?usp=sharing&ouid=118029755189425548535" target="_blank" alt="">
-        <area shape="circle" coords="704,80,25" href="https://www.instagram.com/universaltruths.2025/" target="_blank">
-      </map>
-    </div>
-  </div>
 <script type="text/javascript">
 function MM_swapImgRestore() {
   var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
@@ -137,5 +25,122 @@ function MM_swapImage() {
    if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
 }
 </script>
+<style>
+body {
+  color: #FFFFFF;
+  background-image: url('Images/backgroundig225.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+h1, h2, h3, h4, h5, h6, p, a {
+  color: #FFFFFF;
+}
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+img.responsive {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px 0;
+}
+.nav a img {
+  width: 146px;
+  height: 50px;
+  object-fit: contain;
+}
+@media (max-width: 768px) {
+  .nav a img {
+    width: 100px;
+    height: auto;
+  }
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  align-items: center;
+  justify-items: center;
+  margin: 40px 0;
+}
+.grid-item img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.grid-item h2 {
+  margin: 10px 0 5px;
+}
+.grid-item p {
+  margin: 0;
+  padding: 0 10px;
+}
+footer {
+  margin-top: 40px;
+}
+</style>
+</head>
+<body onLoad="MM_preloadImages('Images/homeon.png','Images/abouton.png','Images/resultson.png','Images/surveyon.png')">
+<div class="container">
+  <img src="Images/header.png" alt="Header" class="responsive">
+  <div class="nav">
+    <a href="#" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image3','','Images/homeon.png',1)"><img src="Images/homeoff.png" id="Image3" alt=""></a>
+    <a href="about.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image7','','Images/abouton.png',1)"><img src="Images/aboutoff.png" id="Image7" alt=""></a>
+    <a href="survey.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image10','','Images/surveyon.png',1)"><img src="Images/surveyoff.png" id="Image10" alt=""></a>
+    <a href="results.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image6','','Images/resultson.png',1)"><img src="Images/resultsoff.png" id="Image6" alt=""></a>
+  </div>
+  <img src="Images/hero image.png" alt="Hero Image" class="responsive">
+  <h1>ICED 2025: Universal Truths</h1>
+  <div class="grid">
+    <div class="grid-item">
+      <a href="about.html"><img src="Images/world200.png" alt="About"></a>
+      <a href="about.html">
+        <h2>About Us</h2>
+        <p>Who are we and why did we do this?</p>
+      </a>
+    </div>
+    <div class="grid-item">
+      <a href="survey.html"><img src="Images/survey200.png" alt="Survey"></a>
+      <a href="survey.html">
+        <h2>Take the Survey</h2>
+        <p>Take our survey to help support our research!</p>
+      </a>
+    </div>
+    <div class="grid-item">
+      <a href="results.html"><img src="Images/results200.png" alt="Results"></a>
+      <a href="results.html">
+        <h2>Survey Results</h2>
+        <p>What were the results of the survey?</p>
+      </a>
+    </div>
+  </div>
+  <footer>
+    <img src="Images/footer.png" alt="Footer" class="responsive" usemap="#Map">
+    <map name="Map">
+      <area shape="circle" coords="498,79,27" href="https://docs.google.com/forms/d/e/1FAIpQLSc3th9ICOlK5Ob-6Y3sxbJMXkPmQHDXdZTs-3N02eBvQRNMdQ/viewform?usp=sharing&ouid=118029755189425548535" target="_blank" alt="Survey">
+      <area shape="circle" coords="704,80,25" href="https://www.instagram.com/universaltruths.2025/" target="_blank" alt="Instagram">
+    </map>
+  </footer>
+</div>
 </body>
 </html>
