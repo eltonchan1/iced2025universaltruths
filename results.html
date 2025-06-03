@@ -2,18 +2,18 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <title>ICED 2025: Survey Results</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ICED 2025: Results</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
-      background-image: url('Images/backgroundig225.png');
+      background: url('Images/backgroundig225.png') no-repeat center center fixed;
       background-size: cover;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      margin: 0;
-      font-family: sans-serif;
       color: #FFFFFF;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
     }
 
     a {
@@ -25,113 +25,105 @@
       text-decoration: underline;
     }
 
-    header, footer {
+    .container {
       max-width: 1200px;
-      margin: auto;
-      text-align: center;
+      margin: 0 auto;
+      padding: 20px;
     }
 
-    .nav {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 10px 0;
+    img.responsive {
+      width: 100%;
+      height: auto;
     }
 
-    .nav img {
+    .nav-table {
+      width: 100%;
+      border-spacing: 0;
+    }
+
+    .nav-table td {
+      padding: 0 5px;
+    }
+
+    .nav-table img {
       width: 146px;
-      height: 50px;
-    }
-
-    .hero img {
-      width: 100%;
-      max-width: 1200px;
       height: auto;
-      display: block;
-      margin: auto;
     }
 
-    h1, h2, h3 {
-      text-align: center;
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px 20px;
+      align-items: start;
+      justify-items: center;
+      margin: 40px 0;
     }
 
-    .section-links {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-      max-width: 1200px;
-      margin: 40px auto;
-    }
-
-    .section-links a {
-      text-align: center;
-      max-width: 200px;
-    }
-
-    .section-links img {
-      width: 100%;
-      max-width: 200px;
-      height: auto;
+    .grid-item img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
     }
 
     .charts-container {
-      max-width: 1000px;
-      margin: auto;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 30px;
+      margin: 40px auto;
+      max-width: 1000px;
     }
 
-    footer img {
-      width: 100%;
-      max-width: 1200px;
-      height: auto;
+    footer {
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
-  <header>
-    <img src="Images/header.png" alt="Header" width="1200" height="100">
-    <nav class="nav">
-      <a href="index.html"><img src="Images/homeoff.png" alt="Home"></a>
-      <a href="about.html"><img src="Images/aboutoff.png" alt="About"></a>
-      <a href="survey.html"><img src="Images/surveyoff.png" alt="Survey"></a>
-      <a href="#"><img src="Images/resultsoff.png" alt="Results"></a>
-    </nav>
-  </header>
+  <div class="container">
+    <img src="Images/header.png" alt="Header" class="responsive">
+    <table class="nav-table">
+      <tr>
+        <td><a href="index.html"><img src="Images/homeoff.png" alt="Home"></a></td>
+        <td><a href="about.html"><img src="Images/aboutoff.png" alt="About"></a></td>
+        <td><a href="survey.html"><img src="Images/surveyoff.png" alt="Survey"></a></td>
+        <td><a href="results.html"><img src="Images/resultsoff.png" alt="Results"></a></td>
+      </tr>
+    </table>
 
-  <div class="hero">
-    <img src="Images/hero image.png" alt="Hero">
+    <img src="Images/hero image.png" alt="Hero" class="responsive">
+
+    <h1>Survey Results</h1>
+    <h3 id="responseCount"></h3>
+
+    <div id="chartsContainer" class="charts-container"></div>
+
+    <div class="grid">
+      <div class="grid-item">
+        <a href="about.html"><img src="Images/world200.png" alt="About"></a>
+        <a href="about.html">
+          <h2>About Us</h2>
+          <p>Who are we and why did we do this?</p>
+        </a>
+      </div>
+      <div class="grid-item">
+        <a href="survey.html"><img src="Images/survey200.png" alt="Survey"></a>
+        <a href="survey.html">
+          <h2>Take the Survey</h2>
+          <p>Take our survey to help support our research!</p>
+        </a>
+      </div>
+    </div>
+
+    <footer>
+      <img src="Images/footer.png" alt="Footer" class="responsive" usemap="#Map">
+      <map name="Map">
+        <area shape="circle" coords="498,79,27" href="https://docs.google.com/forms/d/e/1FAIpQLSc3th9ICOlK5Ob-6Y3sxbJMXkPmQHDXdZTs-3N02eBvQRNMdQ/viewform" target="_blank">
+        <area shape="circle" coords="704,80,25" href="https://www.instagram.com/universaltruths.2025/" target="_blank">
+      </map>
+    </footer>
   </div>
-
-  <h1>Results of the Survey!</h1>
-  <h3 id="responseCount"></h3>
-
-  <div id="chartsContainer" class="charts-container"></div>
-
-  <div class="section-links">
-    <a href="about.html">
-      <img src="Images/world200.png" alt="About Us">
-      <h2>About Us</h2>
-      <p>Who are we and why did we do this?</p>
-    </a>
-    <a href="survey.html">
-      <img src="Images/survey200.png" alt="Survey">
-      <h2>Take the Survey</h2>
-      <p>Take our survey to help support our research!</p>
-    </a>
-  </div>
-
-  <footer>
-    <img src="Images/footer.png" alt="Footer" usemap="#Map">
-    <map name="Map">
-      <area shape="circle" coords="498,79,27" href="https://docs.google.com/forms/d/e/1FAIpQLSc3th9ICOlK5Ob-6Y3sxbJMXkPmQHDXdZTs-3N02eBvQRNMdQ/viewform" target="_blank">
-      <area shape="circle" coords="704,80,25" href="https://www.instagram.com/universaltruths.2025/" target="_blank">
-    </map>
-  </footer>
 
   <script>
     const SHEET_ID = '1iBmJhzh4XKOxyfN8jNdtVAFqrlGccsn9UAjbeQD_UtA';
