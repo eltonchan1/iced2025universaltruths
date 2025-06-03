@@ -56,13 +56,24 @@ img.responsive {
   height: auto;
   display: block;
 }
-.nav-table, .content-table {
+.nav-table {
   width: 100%;
   border-spacing: 0;
 }
-.nav-table img, .content-table img {
-  width: 100%;
+.nav-table td {
+  padding: 0 5px;
+}
+.nav-table img {
+  width: 146px;
+  height: 50px;
+  max-width: 100%;
   height: auto;
+}
+@media (max-width: 768px) {
+  .nav-table img {
+    width: 100px;
+    height: auto;
+  }
 }
 .grid {
   display: grid;
