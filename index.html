@@ -1,151 +1,110 @@
 <!doctype html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ICED 2025: Universal Truths</title>
-  <script type="text/javascript">
-    function MM_swapImgRestore() {
-      var i,x,a=document.MM_sr; 
-      for(i=0;a && i<a.length && (x=a[i]) && x.oSrc;i++) x.src=x.oSrc;
-    }
-    function MM_preloadImages() {
-      var d=document; 
-      if(d.images) { 
-        if(!d.MM_p) d.MM_p=new Array();
-        var i,j=d.MM_p.length,a=MM_preloadImages.arguments; 
-        for(i=0; i<a.length; i++)
-          if (a[i].indexOf("#")!=0) { 
-            d.MM_p[j]=new Image; 
-            d.MM_p[j++].src=a[i];
-          }
-      }
-    }
-    function MM_findObj(n, d) {
-      var p,i,x;  
-      if(!d) d=document; 
-      if((p=n.indexOf("?"))>0 && parent.frames.length) {
-        d=parent.frames[n.substring(p+1)].document; 
-        n=n.substring(0,p);
-      }
-      if(!(x=d[n]) && d.all) x=d.all[n]; 
-      for (i=0;!x && i<d.forms.length;i++) x=d.forms[i][n];
-      for(i=0;!x && d.layers && i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
-      if(!x && d.getElementById) x=d.getElementById(n); 
-      return x;
-    }
-    function MM_swapImage() {
-      var i,j=0,x,a=MM_swapImage.arguments; 
-      document.MM_sr=new Array; 
-      for(i=0;i<(a.length-2);i+=3)
-        if ((x=MM_findObj(a[i]))!=null) {
-          document.MM_sr[j++]=x; 
-          if(!x.oSrc) x.oSrc=x.src; 
-          x.src=a[i+2];
-        }
-    }
-  </script>
-  <style>
-    body {
-      color: #FFFFFF;
-      background-image: url('Images/backgroundig225.png');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      font-family: sans-serif;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-    h1, h2, h3, h4, h5, h6, p, a {
-      color: #FFFFFF;
-    }
-    a {
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    img.responsive {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    .nav {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
-      padding: 20px 0;
-    }
-    .nav a img {
-      width: 146px;
-      height: 50px;
-      object-fit: contain;
-    }
-    @media (max-width: 768px) {
-      .nav img {
-        width: 100px;
-        height: auto;
-      }
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      align-items: center;
-      justify-items: center;
-      margin: 40px 0;
-    }
-    .grid-item img {
-      width: 200px;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-    .grid-item h2 {
-      margin: 10px 0 5px;
-    }
-    .grid-item p {
-      margin: 0;
-      padding: 0 10px;
-    }
-    footer {
-      margin-top: 40px;
-    }
-  </style>
-</head>
-<body onLoad="MM_preloadImages('Images/homeon.png','Images/abouton.png','Images/resultson.png','Images/surveyon.png')">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICED 2025: Universal Truths</title>
+<style>
+body {
+  color: #FFFFFF;
+  background-image: url('Images/backgroundig225.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+h1, h2, h3, h4, h5, h6, p, a {
+  color: #FFFFFF;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+a:hover {
+  text-decoration: underline;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+img.responsive {
+  width: 100%;
+  height: auto;
+  display: block;
+}
 
+/* NEW TEXT-BASED NAV STYLING */
+nav.top-menu {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 10px 0;
+}
+nav.top-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+nav.top-menu li a {
+  font-size: 18px;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+nav.top-menu li a:hover {
+  color: #FFD700;
+}
+
+/* CONTENT GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  align-items: center;
+  justify-items: center;
+  margin: 40px 0;
+}
+.grid-item img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.grid-item h2 {
+  margin: 10px 0 5px;
+}
+.grid-item p {
+  margin: 0;
+  padding: 0 10px;
+}
+footer {
+  margin-top: 40px;
+}
+</style>
+</head>
+
+<body>
 <div class="container">
   <img src="Images/header.png" alt="Header" class="responsive">
 
-  <!-- Top Navigation Menu -->
-  <div class="nav">
-    <a href="index.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('navhome','','Images/homeon.png',1)">
-      <img src="Images/homeoff.png" id="navhome" alt="Home">
-    </a>
-    <a href="about.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('navabout','','Images/abouton.png',1)">
-      <img src="Images/aboutoff.png" id="navabout" alt="About">
-    </a>
-    <a href="survey.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('navsurvey','','Images/surveyon.png',1)">
-      <img src="Images/surveyoff.png" id="navsurvey" alt="Survey">
-    </a>
-    <a href="results.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('navresults','','Images/resultson.png',1)">
-      <img src="Images/resultsoff.png" id="navresults" alt="Results">
-    </a>
-  </div>
+  <!-- New top menu -->
+  <nav class="top-menu">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="survey.html">Survey</a></li>
+      <li><a href="results.html">Results</a></li>
+    </ul>
+  </nav>
 
-  <!-- Main Hero Image -->
   <img src="Images/hero image.png" alt="Hero Image" class="responsive">
   <h1>ICED 2025: Universal Truths</h1>
 
-  <!-- Grid Section -->
   <div class="grid">
     <div class="grid-item">
       <a href="about.html"><img src="Images/world200.png" alt="About"></a>
@@ -170,7 +129,6 @@
     </div>
   </div>
 
-  <!-- Footer -->
   <footer>
     <img src="Images/footer.png" alt="Footer" class="responsive" usemap="#Map">
     <map name="Map">
@@ -179,6 +137,5 @@
     </map>
   </footer>
 </div>
-
 </body>
 </html>
