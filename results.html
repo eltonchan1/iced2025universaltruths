@@ -50,6 +50,30 @@
       height: auto;
     }
 
+    /* Responsive menu layout for mobile */
+    @media (max-width: 600px) {
+      .nav-table {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .nav-table tr {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .nav-table td {
+        padding: 5px 0;
+        text-align: center;
+      }
+
+      .nav-table img {
+        width: 100px;
+      }
+    }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
