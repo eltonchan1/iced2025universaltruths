@@ -2,8 +2,49 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>ICED 2025: Take the Survey!</title>
+  <title>ICED 2025: Results of the Survey!</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript">
+    function MM_swapImgRestore() {
+      var i, x, a = document.MM_sr;
+      for (i = 0; a && i < a.length && (x = a[i]) && x.oSrc; i++) x.src = x.oSrc;
+    }
+    function MM_preloadImages() {
+      var d = document;
+      if (d.images) {
+        if (!d.MM_p) d.MM_p = new Array();
+        var i, j = d.MM_p.length, a = MM_preloadImages.arguments;
+        for (i = 0; i < a.length; i++)
+          if (a[i].indexOf("#") != 0) {
+            d.MM_p[j] = new Image;
+            d.MM_p[j++].src = a[i];
+          }
+      }
+    }
+    function MM_findObj(n, d) {
+      var p, i, x;
+      if (!d) d = document;
+      if ((p = n.indexOf("?")) > 0 && parent.frames.length) {
+        d = parent.frames[n.substring(p + 1)].document;
+        n = n.substring(0, p);
+      }
+      if (!(x = d[n]) && d.all) x = d.all[n];
+      for (i = 0; !x && i < d.forms.length; i++) x = d.forms[i][n];
+      for (i = 0; !x && d.layers && i < d.layers.length; i++) x = MM_findObj(n, d.layers[i].document);
+      if (!x && d.getElementById) x = d.getElementById(n);
+      return x;
+    }
+    function MM_swapImage() {
+      var i, j = 0, x, a = MM_swapImage.arguments;
+      document.MM_sr = new Array;
+      for (i = 0; i < (a.length - 2); i += 3)
+        if ((x = MM_findObj(a[i])) != null) {
+          document.MM_sr[j++] = x;
+          if (!x.oSrc) x.oSrc = x.src;
+          x.src = a[i + 2];
+        }
+    }
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
@@ -38,14 +79,17 @@
 
     .nav-table {
       width: 100%;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
+      border-spacing: 0;
     }
 
-    .nav-table a img {
-      width: 140px;
+    .nav-table td {
+      padding: 0 5px;
+    }
+
+    .nav-table img {
+      width: 146px;
+      height: 50px;
+      max-width: 100%;
       height: auto;
     }
 
@@ -74,47 +118,59 @@
       padding: 0 10px;
     }
 
+    footer {
+      margin-top: 40px;
+    }
+
+    .charts-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      margin: 40px 0;
+    }
+
     .chart-wrapper {
-      margin: 40px auto;
-      background-color: rgba(0, 0, 0, 0.5);
-      border-radius: 10px;
+      background-color: rgba(0, 0, 0, 0.6);
       padding: 20px;
-      max-width: 600px;
+      border-radius: 8px;
+      width: 300px;
+      color: #FFFFFF;
     }
 
     .chart-title {
-      font-size: 1.2em;
+      font-weight: bold;
       margin-bottom: 10px;
     }
 
     .chart-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 10px;
       text-align: left;
-      padding: 10px;
-      max-width: 300px;
-      margin: 0 auto;
     }
 
-    footer {
-      margin-top: 40px;
+    .chart-list li {
+      margin-bottom: 5px;
     }
   </style>
 </head>
-<body>
+<body onLoad="MM_preloadImages('Images/homeon.png','Images/abouton.png','Images/resultson.png','Images/surveyon.png')">
   <div class="container">
     <img src="Images/header.png" alt="Header" class="responsive">
-    <div class="nav-table">
-      <a href="index.html"><img src="Images/homeoff.png" alt="Home"></a>
-      <a href="about.html"><img src="Images/aboutoff.png" alt="About"></a>
-      <a href="survey.html"><img src="Images/surveyoff.png" alt="Survey"></a>
-      <a href="results.html"><img src="Images/resultsoff.png" alt="Results"></a>
-    </div>
+    <table class="nav-table">
+      <tr>
+        <td><a href="index.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image3','','Images/homeon.png',1)"><img src="Images/homeoff.png" alt="Home" id="Image3"></a></td>
+        <td><a href="about.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image7','','Images/abouton.png',1)"><img src="Images/aboutoff.png" alt="About" id="Image7"></a></td>
+        <td><a href="survey.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image10','','Images/surveyon.png',1)"><img src="Images/surveyoff.png" alt="Survey" id="Image10"></a></td>
+        <td><a href="results.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image6','','Images/resultson.png',1)"><img src="Images/resultsoff.png" alt="Results" id="Image6"></a></td>
+      </tr>
+    </table>
 
     <img src="Images/hero image.png" alt="Hero" class="responsive">
 
-    <h1>Results of the survey!</h1>
-    <h3 id="responseCount"></h3>
-
-    <div id="chartsContainer"></div>
+    <h1>Results of the Survey!</h1>
+    <div id="chartsContainer" class="charts-container"></div>
 
     <div class="grid">
       <div class="grid-item">
@@ -136,8 +192,8 @@
     <footer>
       <img src="Images/footer.png" alt="Footer" class="responsive" usemap="#Map">
       <map name="Map">
-        <area shape="circle" coords="498,79,27" href="https://docs.google.com/forms/d/e/1FAIpQLSc3th9ICOlK5Ob-6Y3sxbJMXkPmQHDXdZTs-3N02eBvQRNMdQ/viewform" target="_blank">
-        <area shape="circle" coords="704,80,25" href="https://www.instagram.com/universaltruths.2025/" target="_blank">
+        <area shape="circle" coords="498,79,27" href="https://docs.google.com/forms/d/e/1FAIpQLSc3th9ICOlK5Ob-6Y3sxbJMXkPmQHDXdZTs-3N02eBvQRNMdQ/viewform?usp=sharing&ouid=118029755189425548535" target="_blank" alt="Survey">
+        <area shape="circle" coords="704,80,25" href="https://www.instagram.com/universaltruths.2025/" target="_blank" alt="Instagram">
       </map>
     </footer>
   </div>
@@ -158,8 +214,6 @@
       }
 
       const [headers, ...rows] = data.values;
-      document.getElementById("responseCount").textContent = `${rows.length} people have filled out the survey.`;
-
       const chartsContainer = document.getElementById("chartsContainer");
 
       for (let col = 1; col < headers.length; col++) {
