@@ -70,22 +70,36 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 30px;
+      gap: 40px;
       margin: 40px auto;
-      max-width: 1000px;
+      max-width: 1400px;
     }
 
     .chart-wrapper {
-      width: 320px;
-      text-align: center;
+      width: 400px;
+      background-color: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .chart-wrapper canvas {
+      max-width: 100%;
+      height: auto;
     }
 
     .chart-list {
+      max-height: 200px;
+      overflow-y: auto;
       text-align: left;
       color: #FFFFFF;
       font-size: 14px;
-      padding: 10px;
-      margin: 0;
+      margin: 10px 0 0;
+      padding-left: 20px;
+    }
+
+    .chart-list li {
+      margin-bottom: 4px;
     }
 
     footer {
@@ -195,7 +209,10 @@
               title: {
                 display: true,
                 text: headers[col],
-                color: '#FFFFFF'
+                color: '#FFFFFF',
+                font: {
+                  size: 18
+                }
               },
               legend: {
                 display: showLegend,
