@@ -75,6 +75,19 @@
       max-width: 1000px;
     }
 
+    .chart-wrapper {
+      width: 320px;
+      text-align: center;
+    }
+
+    .chart-list {
+      text-align: left;
+      color: #FFFFFF;
+      font-size: 14px;
+      padding: 10px;
+      margin: 0;
+    }
+
     footer {
       margin-top: 40px;
     }
@@ -152,20 +165,27 @@
           counts[answer] = (counts[answer] || 0) + 1;
         }
 
+        const wrapper = document.createElement("div");
+        wrapper.className = "chart-wrapper";
+
         const canvas = document.createElement('canvas');
-        canvas.width = 300;
-        canvas.height = 300;
-        chartsContainer.appendChild(canvas);
+        wrapper.appendChild(canvas);
+
+        const labels = Object.keys(counts);
+        const values = Object.values(counts);
+        const showLegend = labels.length <= 6;
 
         new Chart(canvas.getContext('2d'), {
           type: 'pie',
           data: {
-            labels: Object.keys(counts),
+            labels: labels,
             datasets: [{
-              data: Object.values(counts),
+              data: values,
               backgroundColor: [
-                '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0',
-                '#9966FF', '#FF9F40', '#66FF66', '#FF6666'
+                '#FF6384', '#36A2EB', '#FFCE56',
+                '#4BC0C0', '#9966FF', '#FF9F40',
+                '#66FF66', '#FF6666', '#A52A2A',
+                '#00CED1', '#DA70D6', '#FFD700'
               ]
             }]
           },
@@ -178,6 +198,7 @@
                 color: '#FFFFFF'
               },
               legend: {
+                display: showLegend,
                 labels: {
                   color: '#FFFFFF'
                 }
@@ -185,6 +206,19 @@
             }
           }
         });
+
+        if (!showLegend) {
+          const list = document.createElement("ul");
+          list.className = "chart-list";
+          for (let i = 0; i < labels.length; i++) {
+            const li = document.createElement("li");
+            li.textContent = `${labels[i]}: ${values[i]}`;
+            list.appendChild(li);
+          }
+          wrapper.appendChild(list);
+        }
+
+        chartsContainer.appendChild(wrapper);
       }
     }
 
