@@ -72,34 +72,41 @@
       justify-content: center;
       gap: 40px;
       margin: 40px auto;
-      max-width: 1400px;
+      max-width: 1200px;
     }
 
     .chart-wrapper {
-      width: 400px;
-      background-color: rgba(255, 255, 255, 0.05);
+      background: rgba(0, 0, 0, 0.4);
       padding: 20px;
       border-radius: 12px;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+      max-width: 400px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
-    .chart-wrapper canvas {
-      max-width: 100%;
-      height: auto;
+    .chart-title {
+      color: #FFFFFF;
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-align: center;
+      white-space: normal;
+      word-wrap: break-word;
+      padding: 0 10px;
     }
 
     .chart-list {
-      max-height: 200px;
+      max-height: 150px;
       overflow-y: auto;
+      margin-top: 15px;
+      padding-left: 15px;
       text-align: left;
-      color: #FFFFFF;
-      font-size: 14px;
-      margin: 10px 0 0;
-      padding-left: 20px;
+      list-style: disc;
     }
 
     .chart-list li {
-      margin-bottom: 4px;
+      font-size: 14px;
+      margin-bottom: 5px;
     }
 
     footer {
@@ -182,6 +189,11 @@
         const wrapper = document.createElement("div");
         wrapper.className = "chart-wrapper";
 
+        const title = document.createElement("div");
+        title.className = "chart-title";
+        title.textContent = headers[col];
+        wrapper.appendChild(title);
+
         const canvas = document.createElement('canvas');
         wrapper.appendChild(canvas);
 
@@ -206,14 +218,7 @@
           options: {
             responsive: true,
             plugins: {
-              title: {
-                display: true,
-                text: headers[col],
-                color: '#FFFFFF',
-                font: {
-                  size: 18
-                }
-              },
+              title: { display: false },
               legend: {
                 display: showLegend,
                 labels: {
