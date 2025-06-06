@@ -38,30 +38,25 @@
     }
 
     .nav-table {
-      width: 100%;
-      border-spacing: 0;
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
-      gap: 10px;
+      align-items: center;
+      flex-wrap: nowrap;
+      gap: 5px;
+      overflow-x: auto;
       margin-bottom: 20px;
+      padding: 0 10px;
     }
 
     .nav-table a img {
-      width: 146px;
-      height: 50px;
+      width: 130px;
+      height: auto;
+      flex-shrink: 0;
     }
 
-    @media (max-width: 768px) {
-      .nav-table {
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-      }
-
+    @media (max-width: 480px) {
       .nav-table a img {
-        width: 120px;
-        height: auto;
+        width: 90px;
       }
     }
 
@@ -133,7 +128,7 @@
   <div class="container">
     <img src="Images/header.png" alt="Header" class="responsive">
 
-    <!-- Responsive Nav -->
+    <!-- Horizontal Nav -->
     <div class="nav-table">
       <a href="index.html"><img src="Images/homeoff.png" alt="Home"></a>
       <a href="about.html"><img src="Images/aboutoff.png" alt="About"></a>
