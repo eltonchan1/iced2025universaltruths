@@ -1,1 +1,217 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ICED 2025: Universal Truths</title>
+  <style>
+    body {
+      color: #FFFFFF;
+      background-image: url('Images/backgroundig225.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      overflow-x: hidden;
+    }
 
+    h1, h2, h3, h4, h5, h6, p, a {
+      color: #FFFFFF;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    img.responsive {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 1s ease-in-out;
+      animation: fadeIn 1.2s ease-in-out forwards;
+    }
+
+    .nav-table {
+      width: 100%;
+      border-spacing: 0;
+      animation: slideDown 0.8s ease-in-out forwards;
+    }
+
+    .nav-table td {
+      padding: 0 5px;
+      transition: transform 0.3s;
+    }
+
+    .nav-table td:hover {
+      transform: scale(1.1);
+    }
+
+    .nav-table img {
+      width: 146px;
+      height: auto;
+      max-width: 100%;
+    }
+
+    @media (max-width: 768px) {
+      .nav-table a img {
+        width: 100px;
+      }
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px 20px;
+      align-items: start;
+      justify-items: center;
+      margin: 40px 0;
+      animation: fadeIn 1.5s ease-in;
+    }
+
+    .grid-item {
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .grid-item:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .grid-item img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .grid-item h2 {
+      margin: 10px 0 5px;
+    }
+
+    .grid-item p {
+      margin: 0;
+      padding: 0 10px;
+    }
+
+    footer {
+      margin-top: 40px;
+      animation: fadeIn 2s ease-in;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideDown {
+      0% { opacity: 0; transform: translateY(-40px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+  <script>
+    function MM_swapImgRestore() {
+      var i, x, a = document.MM_sr;
+      for (i = 0; a && i < a.length && (x = a[i]) && x.oSrc; i++) x.src = x.oSrc;
+    }
+    function MM_preloadImages() {
+      var d = document;
+      if (d.images) {
+        if (!d.MM_p) d.MM_p = new Array();
+        var i, j = d.MM_p.length, a = MM_preloadImages.arguments;
+        for (i = 0; i < a.length; i++)
+          if (a[i].indexOf("#") !== 0) {
+            d.MM_p[j] = new Image;
+            d.MM_p[j++].src = a[i];
+          }
+      }
+    }
+    function MM_findObj(n, d) {
+      var p, i, x;
+      if (!d) d = document;
+      if ((p = n.indexOf("?")) > 0 && parent.frames.length) {
+        d = parent.frames[n.substring(p + 1)].document;
+        n = n.substring(0, p);
+      }
+      if (!(x = d[n]) && d.all) x = d.all[n];
+      for (i = 0; !x && i < d.forms.length; i++) x = d.forms[i][n];
+      for (i = 0; !x && d.layers && i < d.layers.length; i++) x = MM_findObj(n, d.layers[i].document);
+      if (!x && d.getElementById) x = d.getElementById(n);
+      return x;
+    }
+    function MM_swapImage() {
+      var i, j = 0, x, a = MM_swapImage.arguments;
+      document.MM_sr = new Array;
+      for (i = 0; i < (a.length - 2); i += 3)
+        if ((x = MM_findObj(a[i])) != null) {
+          document.MM_sr[j++] = x;
+          if (!x.oSrc) x.oSrc = x.src;
+          x.src = a[i + 2];
+        }
+    }
+  </script>
+</head>
+<body onLoad="MM_preloadImages('Images/homeon.png','Images/abouton.png','Images/resultson.png','Images/surveyon.png')">
+  <div class="container">
+    <img src="Images/header.png" alt="Header" class="responsive">
+    <table class="nav-table">
+      <tr>
+        <td><a href="index.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image3','','Images/homeon.png',1)"><img src="Images/homeoff.png" alt="Home" id="Image3"></a></td>
+        <td><a href="about.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image7','','Images/abouton.png',1)"><img src="Images/aboutoff.png" alt="About" id="Image7"></a></td>
+        <td><a href="survey.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image10','','Images/surveyon.png',1)"><img src="Images/surveyoff.png" alt="Survey" id="Image10"></a></td>
+        <td><a href="results.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image6','','Images/resultson.png',1)"><img src="Images/resultsoff.png" alt="Results" id="Image6"></a></td>
+      </tr>
+    </table>
+
+    <img src="Images/hero image.png" alt="Hero Image" class="responsive">
+    <h1>ICED 2025: Universal Truths</h1>
+
+    <!-- Grid Section -->
+    <div class="grid">
+      <div class="grid-item">
+        <a href="about.html"><img src="Images/world200.png" alt="About"></a>
+        <a href="about.html">
+          <h2>About Us</h2>
+          <p>Who are we and why did we do this?</p>
+        </a>
+      </div>
+      <div class="grid-item">
+        <a href="survey.html"><img src="Images/survey200.png" alt="Survey"></a>
+        <a href="survey.html">
+          <h2>Take the Survey</h2>
+          <p>Take our survey to help support our research!</p>
+        </a>
+      </div>
+      <div class="grid-item">
+        <a href="results.html"><img src="Images/results200.png" alt="Results"></a>
+        <a href="results.html">
+          <h2>Survey Results</h2>
+          <p>What were the results of the survey?</p>
+        </a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <img src="Images/footer.png" alt="Footer" class="responsive" usemap="#Map">
+      <map name="Map">
+        <area shape="circle" coords="498,79,27" href="https://docs.google.com/forms/d/e/1FAIpQLSc3th9ICOlK5Ob-6Y3sxbJMXkPmQHDXdZTs-3N02eBvQRNMdQ/viewform" target="_blank" alt="Survey">
+        <area shape="circle" coords="704,80,25" href="https://www.instagram.com/universaltruths.2025/" target="_blank" alt="Instagram">
+      </map>
+    </footer>
+  </div>
+</body>
+</html>
