@@ -34,20 +34,35 @@
     img.responsive {
       width: 100%;
       height: auto;
+      display: block;
     }
 
     .nav-table {
       width: 100%;
       border-spacing: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
     }
 
-    .nav-table td {
-      padding: 0 5px;
-    }
-
-    .nav-table img {
+    .nav-table a img {
       width: 146px;
-      height: auto;
+      height: 50px;
+    }
+
+    @media (max-width: 768px) {
+      .nav-table {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .nav-table a img {
+        width: 120px;
+        height: auto;
+      }
     }
 
     .grid {
@@ -117,14 +132,14 @@
 <body>
   <div class="container">
     <img src="Images/header.png" alt="Header" class="responsive">
-    <table class="nav-table">
-      <tr>
-        <td><a href="index.html"><img src="Images/homeoff.png" alt="Home"></a></td>
-        <td><a href="about.html"><img src="Images/aboutoff.png" alt="About"></a></td>
-        <td><a href="survey.html"><img src="Images/surveyoff.png" alt="Survey"></a></td>
-        <td><a href="results.html"><img src="Images/resultsoff.png" alt="Results"></a></td>
-      </tr>
-    </table>
+
+    <!-- Responsive Nav -->
+    <div class="nav-table">
+      <a href="index.html"><img src="Images/homeoff.png" alt="Home"></a>
+      <a href="about.html"><img src="Images/aboutoff.png" alt="About"></a>
+      <a href="survey.html"><img src="Images/surveyoff.png" alt="Survey"></a>
+      <a href="results.html"><img src="Images/resultsoff.png" alt="Results"></a>
+    </div>
 
     <img src="Images/hero image.png" alt="Hero" class="responsive">
 
