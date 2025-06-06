@@ -2,9 +2,8 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>ICED 2025: Survey Results</title>
+  <title>ICED 2025: Survey Results!</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script type="text/javascript">
     function MM_swapImgRestore() {
       var i, x, a = document.MM_sr;
@@ -121,49 +120,6 @@
     footer {
       margin-top: 40px;
     }
-
-    .charts-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 40px;
-      margin: 40px auto;
-      max-width: 1200px;
-    }
-
-    .chart-wrapper {
-      background: rgba(0, 0, 0, 0.4);
-      padding: 20px;
-      border-radius: 12px;
-      max-width: 400px;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    .chart-title {
-      color: #FFFFFF;
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 10px;
-      text-align: center;
-      white-space: normal;
-      word-wrap: break-word;
-      padding: 0 10px;
-    }
-
-    .chart-list {
-      max-height: 150px;
-      overflow-y: auto;
-      margin-top: 15px;
-      padding-left: 15px;
-      text-align: left;
-      list-style: disc;
-    }
-
-    .chart-list li {
-      font-size: 14px;
-      margin-bottom: 5px;
-    }
   </style>
 </head>
 <body onLoad="MM_preloadImages('Images/homeon.png','Images/abouton.png','Images/resultson.png','Images/surveyon.png')">
@@ -180,10 +136,11 @@
 
     <img src="Images/hero image.png" alt="Hero" class="responsive">
 
-    <h1>Results of the survey!</h1>
-    <h3 id="responseCount"></h3>
-    <div id="chartsContainer" class="charts-container"></div>
+    <h1>Survey Results</h1>
+    <p>Results of the survey!</p>
+    <img src="Images/results-graph.png" alt="Survey Results Graph" class="responsive" style="max-width: 800px; margin: 20px 0;">
 
+    <!-- Grid Section -->
     <div class="grid">
       <div class="grid-item">
         <a href="about.html"><img src="Images/world200.png" alt="About"></a>
@@ -193,109 +150,22 @@
         </a>
       </div>
       <div class="grid-item">
-        <a href="survey.html"><img src="Images/results200.png" alt="Results"></a>
+        <a href="survey.html"><img src="Images/survey200.png" alt="Survey"></a>
         <a href="survey.html">
           <h2>Take the Survey</h2>
-          <p>Help support our research by sharing your voice!</p>
+          <p>Take the survey to help support our research!</p>
         </a>
       </div>
     </div>
 
+    <!-- Footer -->
     <footer>
       <img src="Images/footer.png" alt="Footer" class="responsive" usemap="#Map">
       <map name="Map">
-        <area shape="circle" coords="498,79,27" href="https://docs.google.com/forms/d/e/1FAIpQLSc3th9ICOlK5Ob-6Y3sxbJMXkPmQHDXdZTs-3N02eBvQRNMdQ/viewform" target="_blank">
-        <area shape="circle" coords="704,80,25" href="https://www.instagram.com/universaltruths.2025/" target="_blank">
+        <area shape="circle" coords="498,79,27" href="https://docs.google.com/forms/d/e/1FAIpQLSc3th9ICOlK5Ob-6Y3sxbJMXkPmQHDXdZTs-3N02eBvQRNMdQ/viewform?usp=sharing&ouid=118029755189425548535" target="_blank" alt="Survey">
+        <area shape="circle" coords="704,80,25" href="https://www.instagram.com/universaltruths.2025/" target="_blank" alt="Instagram">
       </map>
     </footer>
   </div>
-
-  <script>
-    const SHEET_ID = '1iBmJhzh4XKOxyfN8jNdtVAFqrlGccsn9UAjbeQD_UtA';
-    const API_KEY = 'AIzaSyB4Kvq4D4lUtuH_Ddo1moAeB5K2FbwIMyc';
-    const RANGE = 'Form Responses 1';
-
-    async function fetchData() {
-      const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent(RANGE)}?key=${API_KEY}`;
-      const res = await fetch(url);
-      const data = await res.json();
-
-      if (!data.values || data.values.length <= 1) {
-        document.getElementById("chartsContainer").innerHTML = "<p>No data found</p>";
-        return;
-      }
-
-      const [headers, ...rows] = data.values;
-      document.getElementById("responseCount").textContent = `${rows.length} people have filled out the survey.`;
-
-      const chartsContainer = document.getElementById("chartsContainer");
-
-      for (let col = 1; col < headers.length; col++) {
-        const counts = {};
-        for (let row of rows) {
-          const answer = row[col] || "(Blank)";
-          counts[answer] = (counts[answer] || 0) + 1;
-        }
-
-        const wrapper = document.createElement("div");
-        wrapper.className = "chart-wrapper";
-
-        const title = document.createElement("div");
-        title.className = "chart-title";
-        title.textContent = headers[col];
-        wrapper.appendChild(title);
-
-        const canvas = document.createElement('canvas');
-        wrapper.appendChild(canvas);
-
-        const labels = Object.keys(counts);
-        const values = Object.values(counts);
-        const showLegend = labels.length <= 6;
-
-        new Chart(canvas.getContext('2d'), {
-          type: 'pie',
-          data: {
-            labels: labels,
-            datasets: [{
-              data: values,
-              backgroundColor: [
-                '#FF6384', '#36A2EB', '#FFCE56',
-                '#4BC0C0', '#9966FF', '#FF9F40',
-                '#66FF66', '#FF6666', '#A52A2A',
-                '#00CED1', '#DA70D6', '#FFD700'
-              ]
-            }]
-          },
-          options: {
-            responsive: true,
-            plugins: {
-              title: { display: false },
-              legend: {
-                display: showLegend,
-                labels: {
-                  color: '#FFFFFF'
-                }
-              }
-            }
-          }
-        });
-
-        if (!showLegend) {
-          const list = document.createElement("ul");
-          list.className = "chart-list";
-          for (let i = 0; i < labels.length; i++) {
-            const li = document.createElement("li");
-            li.textContent = `${labels[i]}: ${values[i]}`;
-            list.appendChild(li);
-          }
-          wrapper.appendChild(list);
-        }
-
-        chartsContainer.appendChild(wrapper);
-      }
-    }
-
-    fetchData();
-  </script>
 </body>
 </html>
