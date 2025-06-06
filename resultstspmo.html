@@ -46,9 +46,17 @@
     }
 
     .nav-table img {
-      width: 146px;
+      width: 100%;
+      max-width: 120px;
       height: auto;
     }
+    
+    @media (max-width: 600px) {
+      .nav-table img {
+        max-width: 80px;
+      }
+    }
+
 
     .grid {
       display: grid;
