@@ -139,29 +139,43 @@
     footer {
       margin-top: 40px;
     }
-    .nav-table img {
-      width: 18vw;
-      min-width: 80px;
-      max-width: 140px;
-      height: auto;
+    .nav-wrapper {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 10px 0;
     }
 
-    .nav-table td {
-      padding: 0 5px;
+    .nav-icon {
+      width: 100px;
+      max-width: 22vw;
+      height: auto;
+      transition: transform 0.2s ease;
+    }
+    
+    .nav-icon:hover {
+      transform: scale(1.05);
+    }
+    
+    @media (max-width: 600px) {
+      .nav-icon {
+        width: 70px;
+        max-width: 25vw;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
     <img src="Images/header.png" alt="Header" class="responsive">
-    <table class="nav-table">
-      <tr>
-        <td><a href="index.html"><img src="Images/homeoff.png" alt="Home"></a></td>
-        <td><a href="about.html"><img src="Images/aboutoff.png" alt="About"></a></td>
-        <td><a href="survey.html"><img src="Images/surveyoff.png" alt="Survey"></a></td>
-        <td><a href="results.html"><img src="Images/resultsoff.png" alt="Results"></a></td>
-      </tr>
-    </table>
+    <div class="nav-wrapper">
+      <a href="index.html"><img src="Images/homeoff.png" alt="Home" class="nav-icon"></a>
+      <a href="about.html"><img src="Images/aboutoff.png" alt="About" class="nav-icon"></a>
+      <a href="survey.html"><img src="Images/surveyoff.png" alt="Survey" class="nav-icon"></a>
+      <a href="results.html"><img src="Images/resultsoff.png" alt="Results" class="nav-icon"></a>
+    </div>
+
 
     <img src="Images/hero image.png" alt="Hero" class="responsive">
 
