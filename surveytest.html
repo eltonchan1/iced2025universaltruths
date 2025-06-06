@@ -109,6 +109,15 @@
       margin-bottom: 5px;
     }
 
+    .glass-image {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      display: block;
+      margin: 0 auto 10px auto;
+      border-radius: 8px;
+    }
+
     footer {
       margin-top: 40px;
     }
@@ -180,6 +189,7 @@
       const chartsContainer = document.getElementById("chartsContainer");
 
       for (let col = 1; col < headers.length; col++) {
+        const question = headers[col];
         const counts = {};
         for (let row of rows) {
           const answer = row[col] || "(Blank)";
@@ -189,9 +199,17 @@
         const wrapper = document.createElement("div");
         wrapper.className = "chart-wrapper";
 
+        if (question.toLowerCase().includes("half full") || question.toLowerCase().includes("half empty")) {
+          const img = document.createElement("img");
+          img.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Glass-of-water.jpg/800px-Glass-of-water.jpg";
+          img.alt = "Half Full Glass";
+          img.className = "glass-image";
+          wrapper.appendChild(img);
+        }
+
         const title = document.createElement("div");
         title.className = "chart-title";
-        title.textContent = headers[col];
+        title.textContent = question;
         wrapper.appendChild(title);
 
         const canvas = document.createElement('canvas');
