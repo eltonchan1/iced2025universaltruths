@@ -28,7 +28,7 @@
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 20px;
+      padding: 0;
     }
 
     img.responsive {
@@ -39,16 +39,21 @@
     .nav-table {
       width: 100%;
       border-spacing: 0;
+      background-color: rgba(0, 0, 0, 0.6);
     }
 
     .nav-table td {
-      padding: 0 5px;
+      padding: 0;
+      text-align: center;
+      vertical-align: middle;
     }
 
     .nav-table img {
-      width: 146px;
-      height: auto;
-      transition: 0.3s ease;
+      height: 40px;
+      width: auto;
+      display: block;
+      margin: auto;
+      transition: opacity 0.3s ease;
     }
 
     .grid {
@@ -148,10 +153,10 @@
 
     <table class="nav-table">
       <tr>
-        <td><a href="index.html"><img src="Images/homeoff.png" alt="Home" id="homeBtn"></a></td>
-        <td><a href="about.html"><img src="Images/aboutoff.png" alt="About" id="aboutBtn"></a></td>
-        <td><a href="survey.html"><img src="Images/surveyoff.png" alt="Survey" id="surveyBtn"></a></td>
-        <td><a href="results.html"><img src="Images/resultsoff.png" alt="Results" id="resultsBtn"></a></td>
+        <td><a href="index.html"><img src="Images/homeoff.png" alt="Home" onmouseover="this.src='Images/homeon.png'" onmouseout="this.src='Images/homeoff.png'"></a></td>
+        <td><a href="about.html"><img src="Images/aboutoff.png" alt="About" onmouseover="this.src='Images/abouton.png'" onmouseout="this.src='Images/aboutoff.png'"></a></td>
+        <td><a href="survey.html"><img src="Images/surveyoff.png" alt="Survey" onmouseover="this.src='Images/surveyon.png'" onmouseout="this.src='Images/surveyoff.png'"></a></td>
+        <td><a href="results.html"><img src="Images/resultsoff.png" alt="Results" onmouseover="this.src='Images/resultson.png'" onmouseout="this.src='Images/resultsoff.png'"></a></td>
       </tr>
     </table>
 
@@ -167,7 +172,7 @@
         <a href="about.html"><img src="Images/world200.png" alt="About"></a>
         <a href="about.html">
           <h2>About Us</h2>
-          <p>Who are we and why did we do this? </p>
+          <p>Who are we and why did we do this?</p>
         </a>
       </div>
       <div class="grid-item">
@@ -189,22 +194,6 @@
   </div>
 
   <script>
-    // Swap hover images using JavaScript
-    const hoverImages = {
-      homeBtn: ['Images/homeoff.png', 'Images/homeon.png'],
-      aboutBtn: ['Images/aboutoff.png', 'Images/abouton.png'],
-      surveyBtn: ['Images/surveyoff.png', 'Images/surveyon.png'],
-      resultsBtn: ['Images/resultsoff.png', 'Images/resultson.png']
-    };
-
-    for (const id in hoverImages) {
-      const img = document.getElementById(id);
-      const [off, on] = hoverImages[id];
-      img.addEventListener('mouseenter', () => img.src = on);
-      img.addEventListener('mouseleave', () => img.src = off);
-    }
-
-    // Fetch and display chart data
     const SHEET_ID = '1iBmJhzh4XKOxyfN8jNdtVAFqrlGccsn9UAjbeQD_UtA';
     const API_KEY = 'AIzaSyB4Kvq4D4lUtuH_Ddo1moAeB5K2FbwIMyc';
     const RANGE = 'Form Responses 1';
@@ -285,9 +274,7 @@
               title: { display: false },
               legend: {
                 display: showLegend,
-                labels: {
-                  color: '#FFFFFF'
-                }
+                labels: { color: '#FFFFFF' }
               }
             }
           }
