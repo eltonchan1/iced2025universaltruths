@@ -2,18 +2,138 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>ICED 2025: Survey Results</title>
-  <script type="text/javascript">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ICED 2025: Universal Truths</title>
+  <style>
+    body {
+      color: #FFFFFF;
+      background-image: url('Images/backgroundig225.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5, h6, p, a {
+      color: #FFFFFF;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    img.responsive {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 1s ease-in-out;
+      animation: fadeIn 1.2s ease-in-out forwards;
+    }
+
+    .nav-table {
+      width: 100%;
+      border-spacing: 0;
+      animation: slideDown 0.8s ease-in-out forwards;
+    }
+
+    .nav-table td {
+      padding: 0 5px;
+      transition: transform 0.3s;
+    }
+
+    .nav-table td:hover {
+      transform: scale(1.1);
+    }
+
+    .nav-table img {
+      width: 146px;
+      height: auto;
+      max-width: 100%;
+    }
+
+    @media (max-width: 768px) {
+      .nav-table a img {
+        width: 100px;
+      }
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px 20px;
+      align-items: start;
+      justify-items: center;
+      margin: 40px 0;
+      animation: fadeIn 1.5s ease-in;
+    }
+
+    .grid-item {
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .grid-item:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .grid-item img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .grid-item h2 {
+      margin: 10px 0 5px;
+    }
+
+    .grid-item p {
+      margin: 0;
+      padding: 0 10px;
+    }
+
+    footer {
+      margin-top: 40px;
+      animation: fadeIn 2s ease-in;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideDown {
+      0% { opacity: 0; transform: translateY(-40px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+  <script>
     function MM_swapImgRestore() {
       var i, x, a = document.MM_sr;
       for (i = 0; a && i < a.length && (x = a[i]) && x.oSrc; i++) x.src = x.oSrc;
     }
     function MM_preloadImages() {
-      var d = document; if (d.images) {
+      var d = document;
+      if (d.images) {
         if (!d.MM_p) d.MM_p = new Array();
         var i, j = d.MM_p.length, a = MM_preloadImages.arguments;
         for (i = 0; i < a.length; i++)
-          if (a[i].indexOf("#") != 0) {
+          if (a[i].indexOf("#") !== 0) {
             d.MM_p[j] = new Image;
             d.MM_p[j++].src = a[i];
           }
@@ -43,143 +163,48 @@
         }
     }
   </script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    body {
-      background: url('Images/backgroundig225.png') no-repeat center center fixed;
-      background-size: cover;
-      color: #FFFFFF;
-      font-family: sans-serif;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-
-    a {
-      color: #FFFFFF;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    img.responsive {
-      width: 100%;
-      height: auto;
-    }
-
-    .nav-table {
-      width: 100%;
-      border-spacing: 0;
-    }
-
-    .nav-table td {
-      padding: 0 5px;
-    }
-
-    .nav-table img {
-      width: 146px;
-      height: auto;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 40px 20px;
-      align-items: start;
-      justify-items: center;
-      margin: 40px 0;
-    }
-
-    .grid-item img {
-      width: 200px;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-
-    .charts-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 40px;
-      margin: 40px auto;
-      max-width: 1200px;
-    }
-
-    .chart-wrapper {
-      background: rgba(0, 0, 0, 0.4);
-      padding: 20px;
-      border-radius: 12px;
-      max-width: 400px;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    .chart-title {
-      color: #FFFFFF;
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 10px;
-      text-align: center;
-      white-space: normal;
-      word-wrap: break-word;
-      padding: 0 10px;
-    }
-
-    .chart-list {
-      max-height: 150px;
-      overflow-y: auto;
-      margin-top: 15px;
-      padding-left: 15px;
-      text-align: left;
-      list-style: disc;
-    }
-
-    .chart-list li {
-      font-size: 14px;
-      margin-bottom: 5px;
-    }
-
-    .chart-list::-webkit-scrollbar {
-      width: 10px;
-    }
-
-    .chart-list::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
-    }
-
-    .chart-list::-webkit-scrollbar-thumb {
-      background: #666666;
-      border-radius: 8px;
-    }
-
-    .chart-list::-webkit-scrollbar-thumb:hover {
-      background: #888888;
-    }
-
-    .glass-image {
-      width: 100%;
-      max-width: 300px;
-      height: auto;
-      display: block;
-      margin: 10px auto;
-      border-radius: 8px;
-    }
-
-    footer {
-      margin-top: 40px;
-    }
-  </style>
 </head>
+<body onLoad="MM_preloadImages('Images/homeon.png','Images/abouton.png','Images/resultson.png','Images/surveyon.png')">
+  <div class="container">
+    <img src="Images/header.png" alt="Header" class="responsive">
+    <table class="nav-table">
+      <tr>
+        <td><a href="index.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image3','','Images/homeon.png',1)"><img src="Images/homeoff.png" alt="Home" id="Image3"></a></td>
+        <td><a href="about.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image7','','Images/abouton.png',1)"><img src="Images/aboutoff.png" alt="About" id="Image7"></a></td>
+        <td><a href="survey.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image10','','Images/surveyon.png',1)"><img src="Images/surveyoff.png" alt="Survey" id="Image10"></a></td>
+        <td><a href="results.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image6','','Images/resultson.png',1)"><img src="Images/resultsoff.png" alt="Results" id="Image6"></a></td>
+      </tr>
+    </table>
+
+    <img src="Images/hero image.png" alt="Hero Image" class="responsive">
+    <h1>ICED 2025: Results of the Survey!</h1>
+
+    <!-- Grid Section -->
+    <div class="grid">
+      <div class="grid-item">
+        <a href="about.html"><img src="Images/world200.png" alt="About"></a>
+        <a href="about.html">
+          <h2>About Us</h2>
+          <p>Who are we and why did we do this?</p>
+        </a>
+      </div>
+      <div class="grid-item">
+        <a href="survey.html"><img src="Images/survey200.png" alt="Survey"></a>
+        <a href="survey.html">
+          <h2>Take the Survey</h2>
+          <p>Take our survey to help support our research!</p>
+        </a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <img src="Images/footer.png" alt="Footer" class="responsive" usemap="#Map">
+      <map name="Map">
+        <area shape="circle" coords="498,79,27" href="https://docs.google.com/forms/d/e/1FAIpQLSc3th9ICOlK5Ob-6Y3sxbJMXkPmQHDXdZTs-3N02eBvQRNMdQ/viewform" target="_blank" alt="Survey">
+        <area shape="circle" coords="704,80,25" href="https://www.instagram.com/universaltruths.2025/" target="_blank" alt="Instagram">
+      </map>
+    </footer>
+  </div>
 </body>
 </html>
