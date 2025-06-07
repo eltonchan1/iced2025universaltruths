@@ -1,179 +1,122 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <title>ICED 2025: Survey Results</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="icon" href="Images/favicon.png" type="image/png">
   <style>
     body {
-      background: url('Images/backgroundig225.png') no-repeat center center fixed;
-      background-size: cover;
-      color: #FFFFFF;
-      font-family: sans-serif;
       margin: 0;
       padding: 0;
+      font-family: Arial, sans-serif;
+      background: url('Images/backgroundig225.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
       text-align: center;
     }
 
-    a {
-      color: #FFFFFF;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0;
-    }
-
-    img.responsive {
-      width: 100%;
-      height: auto;
-    }
-
-    .nav-table {
-      width: 100%;
-      border-spacing: 0;
-      background-color: rgba(0, 0, 0, 0.6);
-    }
-
-    .nav-table td {
-      padding: 0;
-      text-align: center;
-      vertical-align: middle;
-    }
-
-    .nav-table img {
-      height: 40px;
-      width: auto;
-      display: block;
-      margin: auto;
-      transition: opacity 0.3s ease;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 40px 20px;
-      align-items: start;
-      justify-items: center;
-      margin: 40px 0;
-    }
-
-    .grid-item img {
-      width: 200px;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-
-    .charts-container {
+    .nav-menu {
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
-      gap: 40px;
-      margin: 40px auto;
-      max-width: 1200px;
+      gap: 10px;
+      margin: 20px 0;
+      flex-wrap: wrap;
     }
 
-    .chart-wrapper {
-      background: rgba(0, 0, 0, 0.4);
-      padding: 20px;
+    .nav-button {
+      width: 146px;
+      height: 50px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      display: inline-block;
+      transition: background-image 0.3s ease;
+    }
+
+    .nav-button.home {
+      background-image: url('Images/homeoff.png');
+    }
+    .nav-button.home:hover {
+      background-image: url('Images/homeon.png');
+    }
+
+    .nav-button.about {
+      background-image: url('Images/aboutoff.png');
+    }
+    .nav-button.about:hover {
+      background-image: url('Images/abouton.png');
+    }
+
+    .nav-button.survey {
+      background-image: url('Images/surveyoff.png');
+    }
+    .nav-button.survey:hover {
+      background-image: url('Images/surveyon.png');
+    }
+
+    .nav-button.results {
+      background-image: url('Images/resultsoff.png');
+    }
+    .nav-button.results:hover {
+      background-image: url('Images/resultson.png');
+    }
+
+    .title {
+      margin: 20px 0;
+      font-size: 24px;
+    }
+
+    .grid-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin: 20px auto;
+      max-width: 1000px;
+    }
+
+    .grid-item {
+      background: rgba(0, 0, 0, 0.6);
       border-radius: 12px;
-      max-width: 400px;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    .chart-title {
-      color: #FFFFFF;
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 10px;
-      text-align: center;
-      white-space: normal;
-      word-wrap: break-word;
-      padding: 0 10px;
-    }
-
-    .chart-list {
-      max-height: 150px;
-      overflow-y: auto;
-      margin-top: 15px;
-      padding-left: 15px;
-      text-align: left;
-      list-style: disc;
-    }
-
-    .chart-list li {
-      font-size: 14px;
-      margin-bottom: 5px;
-    }
-
-    .chart-list::-webkit-scrollbar {
-      width: 10px;
-    }
-
-    .chart-list::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
-    }
-
-    .chart-list::-webkit-scrollbar-thumb {
-      background: #666666;
-      border-radius: 8px;
-    }
-
-    .chart-list::-webkit-scrollbar-thumb:hover {
-      background: #888888;
-    }
-
-    .glass-image {
+      padding: 15px;
       width: 100%;
       max-width: 300px;
-      height: auto;
-      display: block;
-      margin: 10px auto;
-      border-radius: 8px;
+      box-sizing: border-box;
+      text-align: center;
     }
 
-    footer {
-      margin-top: 40px;
-    }
     .grid-item img {
       width: 150px;
       height: 150px;
       object-fit: cover;
       border-radius: 8px;
-      transition: all 0.3s ease;
+      transition: transform 0.3s ease;
     }
-    
+
+    .grid-item:hover img {
+      transform: scale(1.05);
+    }
+
     .grid-item h2 {
       font-size: 18px;
       margin: 10px 0 5px;
     }
-    
+
     .grid-item p {
       font-size: 14px;
       margin: 0;
     }
-    
-    /* Desktop-only scaling */
-    @media screen and (min-width: 768px) {
+
+    @media (min-width: 768px) {
       .grid-item img {
         width: 220px;
         height: 220px;
       }
-    
+
       .grid-item h2 {
         font-size: 22px;
       }
-    
+
       .grid-item p {
         font-size: 16px;
       }
@@ -181,154 +124,36 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <img src="Images/header.png" alt="Header" class="responsive">
 
-    <table class="nav-table">
-      <tr>
-        <td><a href="index.html"><img src="Images/homeoff.png" alt="Home" onmouseover="this.src='Images/homeon.png'" onmouseout="this.src='Images/homeoff.png'"></a></td>
-        <td><a href="about.html"><img src="Images/aboutoff.png" alt="About" onmouseover="this.src='Images/abouton.png'" onmouseout="this.src='Images/aboutoff.png'"></a></td>
-        <td><a href="survey.html"><img src="Images/surveyoff.png" alt="Survey" onmouseover="this.src='Images/surveyon.png'" onmouseout="this.src='Images/surveyoff.png'"></a></td>
-        <td><a href="results.html"><img src="Images/resultsoff.png" alt="Results" onmouseover="this.src='Images/resultson.png'" onmouseout="this.src='Images/resultsoff.png'"></a></td>
-      </tr>
-    </table>
+  <!-- Navigation -->
+  <nav class="nav-menu">
+    <a href="index.html" class="nav-button home"></a>
+    <a href="about.html" class="nav-button about"></a>
+    <a href="survey.html" class="nav-button survey"></a>
+    <a href="results.html" class="nav-button results"></a>
+  </nav>
 
-    <img src="Images/hero image.png" alt="Hero" class="responsive">
+  <!-- Title -->
+  <div class="title">ICED 2025: Survey Results</div>
 
-    <h1>Results of the survey!</h1>
-    <h3 id="responseCount"></h3>
-
-    <div id="chartsContainer" class="charts-container"></div>
-
-    <div class="grid">
-      <div class="grid-item">
-        <a href="about.html"><img src="Images/world200.png" alt="About"></a>
-        <a href="about.html">
-          <h2>About Us</h2>
-          <p>Who are we and why did we do this?</p>
-        </a>
-      </div>
-      <div class="grid-item">
-        <a href="survey.html"><img src="Images/survey200.png" alt="Survey"></a>
-        <a href="survey.html">
-          <h2>Take the Survey</h2>
-          <p>Take our survey to help support our research!</p>
-        </a>
-      </div>
+  <!-- Example Buttons Grid -->
+  <div class="grid-container">
+    <div class="grid-item">
+      <img src="Images/abouticon.png" alt="About">
+      <h2>About Us</h2>
+      <p>Learn about our team and mission.</p>
     </div>
-
-    <footer>
-      <img src="Images/footer.png" alt="Footer" class="responsive" usemap="#Map">
-      <map name="Map">
-        <area shape="circle" coords="498,79,27" href="https://docs.google.com/forms/d/e/1FAIpQLSc3th9ICOlK5Ob-6Y3sxbJMXkPmQHDXdZTs-3N02eBvQRNMdQ/viewform" target="_blank">
-        <area shape="circle" coords="704,80,25" href="https://www.instagram.com/universaltruths.2025/" target="_blank">
-      </map>
-    </footer>
+    <div class="grid-item">
+      <img src="Images/surveyicon.png" alt="Take Survey">
+      <h2>Take the Survey</h2>
+      <p>Share your voice and opinions.</p>
+    </div>
+    <div class="grid-item">
+      <img src="Images/resultsicon.png" alt="View Results">
+      <h2>View Results</h2>
+      <p>See what others are saying.</p>
+    </div>
   </div>
 
-  <script>
-    const SHEET_ID = '1iBmJhzh4XKOxyfN8jNdtVAFqrlGccsn9UAjbeQD_UtA';
-    const API_KEY = 'AIzaSyB4Kvq4D4lUtuH_Ddo1moAeB5K2FbwIMyc';
-    const RANGE = 'Form Responses 1';
-
-    async function fetchData() {
-      const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent(RANGE)}?key=${API_KEY}`;
-      const res = await fetch(url);
-      const data = await res.json();
-
-      if (!data.values || data.values.length <= 1) {
-        document.getElementById("chartsContainer").innerHTML = "<p>No data found</p>";
-        return;
-      }
-
-      const [headers, ...rows] = data.values;
-      document.getElementById("responseCount").textContent = `${rows.length} people have filled out the survey.`;
-
-      const chartsContainer = document.getElementById("chartsContainer");
-
-      for (let col = 1; col < headers.length; col++) {
-        const question = headers[col];
-        const counts = {};
-        for (let row of rows) {
-          const answer = row[col] || "(Blank)";
-          counts[answer] = (counts[answer] || 0) + 1;
-        }
-
-        const wrapper = document.createElement("div");
-        wrapper.className = "chart-wrapper";
-
-        const title = document.createElement("div");
-        title.className = "chart-title";
-        title.textContent = question;
-        wrapper.appendChild(title);
-
-        const qText = question.toLowerCase();
-
-        if (qText.includes("half full") || qText.includes("half empty")) {
-          const img = document.createElement("img");
-          img.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Glass-of-water.jpg/800px-Glass-of-water.jpg";
-          img.alt = "Half Full Glass";
-          img.className = "glass-image";
-          wrapper.appendChild(img);
-        }
-
-        if (qText.includes("what do you think this is")) {
-          const img = document.createElement("img");
-          img.src = "https://media.istockphoto.com/id/1408532022/vector/cheerful-smiley-face-icon-emotion-black-contour-line-sketch-drawing-vector-simple-flat.jpg?s=612x612&w=0&k=20&c=ALCDsBgJO1agZk9ghoVxvCRE-i3dEMmDegD0kUdhd04=";
-          img.alt = "Smiley Face";
-          img.className = "glass-image";
-          wrapper.appendChild(img);
-        }
-
-        const canvas = document.createElement('canvas');
-        wrapper.appendChild(canvas);
-
-        const labels = Object.keys(counts);
-        const values = Object.values(counts);
-        const showLegend = labels.length <= 6;
-
-        new Chart(canvas.getContext('2d'), {
-          type: 'pie',
-          data: {
-            labels: labels,
-            datasets: [{
-              data: values,
-              backgroundColor: [
-                '#FF6384', '#36A2EB', '#FFCE56',
-                '#4BC0C0', '#9966FF', '#FF9F40',
-                '#66FF66', '#FF6666', '#A52A2A',
-                '#00CED1', '#DA70D6', '#FFD700'
-              ]
-            }]
-          },
-          options: {
-            responsive: true,
-            plugins: {
-              title: { display: false },
-              legend: {
-                display: showLegend,
-                labels: { color: '#FFFFFF' }
-              }
-            }
-          }
-        });
-
-        if (!showLegend) {
-          const list = document.createElement("ul");
-          list.className = "chart-list";
-          for (let i = 0; i < labels.length; i++) {
-            const li = document.createElement("li");
-            li.textContent = `${labels[i]}: ${values[i]}`;
-            list.appendChild(li);
-          }
-          wrapper.appendChild(list);
-        }
-
-        chartsContainer.appendChild(wrapper);
-      }
-    }
-
-    fetchData();
-  </script>
 </body>
 </html>
