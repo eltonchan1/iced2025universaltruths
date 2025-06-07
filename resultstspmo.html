@@ -46,17 +46,10 @@
     }
 
     .nav-table img {
-      width: 100%;
-      max-width: 120px;
+      width: 146px;
       height: auto;
+      transition: 0.3s ease;
     }
-    
-    @media (max-width: 600px) {
-      .nav-table img {
-        max-width: 80px;
-      }
-    }
-
 
     .grid {
       display: grid;
@@ -147,43 +140,20 @@
     footer {
       margin-top: 40px;
     }
-    .nav-wrapper {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      padding: 10px 0;
-    }
-
-    .nav-icon {
-      width: 100px;
-      max-width: 22vw;
-      height: auto;
-      transition: transform 0.2s ease;
-    }
-    
-    .nav-icon:hover {
-      transform: scale(1.05);
-    }
-    
-    @media (max-width: 600px) {
-      .nav-icon {
-        width: 70px;
-        max-width: 25vw;
-      }
-    }
   </style>
 </head>
 <body>
   <div class="container">
     <img src="Images/header.png" alt="Header" class="responsive">
-    <div class="nav-wrapper">
-      <a href="index.html"><img src="Images/homeoff.png" alt="Home" class="nav-icon"></a>
-      <a href="about.html"><img src="Images/aboutoff.png" alt="About" class="nav-icon"></a>
-      <a href="survey.html"><img src="Images/surveyoff.png" alt="Survey" class="nav-icon"></a>
-      <a href="results.html"><img src="Images/resultsoff.png" alt="Results" class="nav-icon"></a>
-    </div>
 
+    <table class="nav-table">
+      <tr>
+        <td><a href="index.html"><img src="Images/homeoff.png" alt="Home" id="homeBtn"></a></td>
+        <td><a href="about.html"><img src="Images/aboutoff.png" alt="About" id="aboutBtn"></a></td>
+        <td><a href="survey.html"><img src="Images/surveyoff.png" alt="Survey" id="surveyBtn"></a></td>
+        <td><a href="results.html"><img src="Images/resultsoff.png" alt="Results" id="resultsBtn"></a></td>
+      </tr>
+    </table>
 
     <img src="Images/hero image.png" alt="Hero" class="responsive">
 
@@ -219,6 +189,22 @@
   </div>
 
   <script>
+    // Swap hover images using JavaScript
+    const hoverImages = {
+      homeBtn: ['Images/homeoff.png', 'Images/homeon.png'],
+      aboutBtn: ['Images/aboutoff.png', 'Images/abouton.png'],
+      surveyBtn: ['Images/surveyoff.png', 'Images/surveyon.png'],
+      resultsBtn: ['Images/resultsoff.png', 'Images/resultson.png']
+    };
+
+    for (const id in hoverImages) {
+      const img = document.getElementById(id);
+      const [off, on] = hoverImages[id];
+      img.addEventListener('mouseenter', () => img.src = on);
+      img.addEventListener('mouseleave', () => img.src = off);
+    }
+
+    // Fetch and display chart data
     const SHEET_ID = '1iBmJhzh4XKOxyfN8jNdtVAFqrlGccsn9UAjbeQD_UtA';
     const API_KEY = 'AIzaSyB4Kvq4D4lUtuH_Ddo1moAeB5K2FbwIMyc';
     const RANGE = 'Form Responses 1';
