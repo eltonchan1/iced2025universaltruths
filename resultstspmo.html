@@ -145,6 +145,39 @@
     footer {
       margin-top: 40px;
     }
+    .grid-item img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    .grid-item h2 {
+      font-size: 18px;
+      margin: 10px 0 5px;
+    }
+    
+    .grid-item p {
+      font-size: 14px;
+      margin: 0;
+    }
+    
+    /* Desktop-only scaling */
+    @media screen and (min-width: 768px) {
+      .grid-item img {
+        width: 220px;
+        height: 220px;
+      }
+    
+      .grid-item h2 {
+        font-size: 22px;
+      }
+    
+      .grid-item p {
+        font-size: 16px;
+      }
+    }
   </style>
 </head>
 <body>
