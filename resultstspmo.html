@@ -36,38 +36,50 @@
       height: auto;
     }
 
-    /* Responsive Nav Bar */
-    .nav-bar {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin: 10px 0;
-    }
-
-    .nav-button {
-      display: inline-block;
-      width: 146px;
-      height: auto;
-      position: relative;
-    }
-
-    .nav-button img {
+    /* Navigation Bar Styles */
+    .nav-table {
       width: 100%;
+      border-spacing: 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+
+    .nav-table td {
+      padding: 0 10px;
+    }
+
+    .nav-table img {
+      width: 146px;
       height: auto;
       display: block;
     }
 
-    .nav-button .hover-img {
+    /* Image Hover Effect */
+    .nav-table img {
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .nav-table a:hover img {
+      opacity: 0;
+    }
+
+    .nav-table a:hover img.hover {
+      opacity: 1;
+    }
+
+    .nav-table a img.hover {
       position: absolute;
       top: 0;
       left: 0;
       opacity: 0;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.3s ease-in-out;
     }
 
-    .nav-button:hover .hover-img {
-      opacity: 1;
+    .nav-table a {
+      position: relative;
+      display: inline-block;
     }
 
     .grid {
@@ -159,31 +171,52 @@
     footer {
       margin-top: 40px;
     }
+
+    /* Responsive Navigation */
+    @media screen and (max-width: 600px) {
+      .nav-table {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .nav-table td {
+        padding: 10px 0;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <img src="Images/header.png" alt="Header" class="responsive">
 
-    <!-- Responsive Nav -->
-    <div class="nav-bar">
-      <a href="index.html" class="nav-button">
-        <img src="Images/homeoff.png" alt="Home">
-        <img src="Images/homeon.png" class="hover-img" alt="Home Hover">
-      </a>
-      <a href="about.html" class="nav-button">
-        <img src="Images/aboutoff.png" alt="About">
-        <img src="Images/abouton.png" class="hover-img" alt="About Hover">
-      </a>
-      <a href="survey.html" class="nav-button">
-        <img src="Images/surveyoff.png" alt="Survey">
-        <img src="Images/surveyon.png" class="hover-img" alt="Survey Hover">
-      </a>
-      <a href="results.html" class="nav-button">
-        <img src="Images/resultsoff.png" alt="Results">
-        <img src="Images/resultson.png" class="hover-img" alt="Results Hover">
-      </a>
-    </div>
+    <table class="nav-table">
+      <tr>
+        <td>
+          <a href="index.html">
+            <img src="Images/homeoff.png" alt="Home">
+            <img src="Images/homeon.png" alt="Home Hover" class="hover">
+          </a>
+        </td>
+        <td>
+          <a href="about.html">
+            <img src="Images/aboutoff.png" alt="About">
+            <img src="Images/abouton.png" alt="About Hover" class="hover">
+          </a>
+        </td>
+        <td>
+          <a href="survey.html">
+            <img src="Images/surveyoff.png" alt="Survey">
+            <img src="Images/surveyon.png" alt="Survey Hover" class="hover">
+          </a>
+        </td>
+        <td>
+          <a href="results.html">
+            <img src="Images/resultsoff.png" alt="Results">
+            <img src="Images/resultson.png" alt="Results Hover" class="hover">
+          </a>
+        </td>
+      </tr>
+    </table>
 
     <img src="Images/hero image.png" alt="Hero" class="responsive">
 
@@ -197,7 +230,7 @@
         <a href="about.html"><img src="Images/world200.png" alt="About"></a>
         <a href="about.html">
           <h2>About Us</h2>
-          <p>Who are we and why did we do this?</p>
+          <p>Who are we and why did we do this? </p>
         </a>
       </div>
       <div class="grid-item">
@@ -266,61 +299,6 @@
 
         if (qText.includes("what do you think this is")) {
           const img = document.createElement("img");
-          img.src = "https://media.istockphoto.com/id/1408532022/vector/cheerful-smiley-face-icon-emotion-black-contour-line-sketch-drawing-vector-simple-flat.jpg?s=612x612&w=0&k=20&c=ALCDsBgJO1agZk9ghoVxvCRE-i3dEMmDegD0kUdhd04=";
-          img.alt = "Smiley Face";
-          img.className = "glass-image";
-          wrapper.appendChild(img);
-        }
-
-        const canvas = document.createElement('canvas');
-        wrapper.appendChild(canvas);
-
-        const labels = Object.keys(counts);
-        const values = Object.values(counts);
-        const showLegend = labels.length <= 6;
-
-        new Chart(canvas.getContext('2d'), {
-          type: 'pie',
-          data: {
-            labels: labels,
-            datasets: [{
-              data: values,
-              backgroundColor: [
-                '#FF6384', '#36A2EB', '#FFCE56',
-                '#4BC0C0', '#9966FF', '#FF9F40',
-                '#66FF66', '#FF6666', '#A52A2A',
-                '#00CED1', '#DA70D6', '#FFD700'
-              ]
-            }]
-          },
-          options: {
-            responsive: true,
-            plugins: {
-              title: { display: false },
-              legend: {
-                display: showLegend,
-                labels: { color: '#FFFFFF' }
-              }
-            }
-          }
-        });
-
-        if (!showLegend) {
-          const list = document.createElement("ul");
-          list.className = "chart-list";
-          for (let i = 0; i < labels.length; i++) {
-            const li = document.createElement("li");
-            li.textContent = `${labels[i]}: ${values[i]}`;
-            list.appendChild(li);
-          }
-          wrapper.appendChild(list);
-        }
-
-        chartsContainer.appendChild(wrapper);
-      }
-    }
-
-    fetchData();
-  </script>
-</body>
-</html>
+          img.src = "https://media.istockphoto.com/id/1408532022/vector/cheerful-smiley-face-icon-emotion-black-contour-line-sketch-drawing-vector-simple-flat.jpg?s=612x612&w=0&k=20&c=ALCDsBgJO1agZk9ghoVxvCRE-i3dEM
+::contentReference[oaicite:8]{index=8}
+ 
