@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>ICED 2025: Survey Results</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script type="text/javascript">
     function MM_swapImgRestore() {
       var i, x, a = document.MM_sr;
@@ -43,7 +44,6 @@
         }
     }
   </script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
@@ -55,41 +55,13 @@
       padding: 0;
       text-align: center;
     }
-
-    a {
-      color: #FFFFFF;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    img.responsive {
-      width: 100%;
-      height: auto;
-    }
-
-    .nav-table {
-      width: 100%;
-      border-spacing: 0;
-    }
-
-    .nav-table td {
-      padding: 0 5px;
-    }
-
-    .nav-table img {
-      width: 146px;
-      height: auto;
-    }
-
+    a { color: #FFFFFF; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+    img.responsive { width: 100%; height: auto; }
+    .nav-table { width: 100%; border-spacing: 0; }
+    .nav-table td { padding: 0 5px; }
+    .nav-table img { width: 146px; height: auto; }
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -98,14 +70,12 @@
       justify-items: center;
       margin: 40px 0;
     }
-
     .grid-item img {
       width: 200px;
       height: 200px;
       object-fit: cover;
       border-radius: 8px;
     }
-
     .charts-container {
       display: flex;
       flex-wrap: wrap;
@@ -114,7 +84,6 @@
       margin: 40px auto;
       max-width: 1200px;
     }
-
     .chart-wrapper {
       background: rgba(0, 0, 0, 0.4);
       padding: 20px;
@@ -123,7 +92,6 @@
       width: 100%;
       box-sizing: border-box;
     }
-
     .chart-title {
       color: #FFFFFF;
       font-size: 18px;
@@ -134,7 +102,6 @@
       word-wrap: break-word;
       padding: 0 10px;
     }
-
     .chart-list {
       max-height: 150px;
       overflow-y: auto;
@@ -143,30 +110,20 @@
       text-align: left;
       list-style: disc;
     }
-
     .chart-list li {
       font-size: 14px;
       margin-bottom: 5px;
     }
-
-    .chart-list::-webkit-scrollbar {
-      width: 10px;
-    }
-
+    .chart-list::-webkit-scrollbar { width: 10px; }
     .chart-list::-webkit-scrollbar-track {
       background: rgba(255, 255, 255, 0.1);
       border-radius: 8px;
     }
-
     .chart-list::-webkit-scrollbar-thumb {
       background: #666666;
       border-radius: 8px;
     }
-
-    .chart-list::-webkit-scrollbar-thumb:hover {
-      background: #888888;
-    }
-
+    .chart-list::-webkit-scrollbar-thumb:hover { background: #888888; }
     .glass-image {
       width: 100%;
       max-width: 300px;
@@ -175,16 +132,9 @@
       margin: 10px auto;
       border-radius: 8px;
     }
-
-    .mobile-nav {
-      display: none;
-    }
-
+    .mobile-nav { display: none; }
     @media screen and (max-width: 480px) {
-      .nav-table {
-        display: none;
-      }
-
+      .nav-table { display: none; }
       .mobile-nav {
         display: flex;
         justify-content: center;
@@ -192,21 +142,15 @@
         gap: 8px;
         padding: 10px;
       }
-
-      .mobile-nav a img {
-        width: 90px;
-        height: auto;
-      }
+      .mobile-nav a img { width: 90px; height: auto; }
     }
-
-    footer {
-      margin-top: 40px;
-    }
+    footer { margin-top: 40px; }
   </style>
 </head>
 <body>
   <div class="container">
     <img src="Images/header.png" alt="Header" class="responsive">
+
     <table class="nav-table">
       <tr>
         <td><a href="index.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image3','','Images/homeon.png',1)"><img src="Images/homeoff.png" alt="Home" id="Image3"></a></td>
@@ -215,6 +159,7 @@
         <td><a href="results.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image6','','Images/resultson.png',1)"><img src="Images/resultsoff.png" alt="Results" id="Image6"></a></td>
       </tr>
     </table>
+
     <div class="mobile-nav">
       <a href="index.html"><img src="Images/homeoff.png" alt="Home"></a>
       <a href="about.html"><img src="Images/aboutoff.png" alt="About"></a>
@@ -222,8 +167,30 @@
       <a href="results.html"><img src="Images/resultsoff.png" alt="Results"></a>
     </div>
 
-    <!-- Rest of your original results1.html content remains unchanged here -->
-    <!-- Including hero image, response count, chart rendering, and footer -->
+    <img src="Images/hero image.png" alt="Hero" class="responsive">
+    <h1>Results of the survey!</h1>
+    <h3 id="responseCount"></h3>
+    <div id="chartsContainer" class="charts-container"></div>
+
+    <div class="grid">
+      <div class="grid-item"><a href="index.html"><img src="Images/homeicon.png" alt="Home"></a></div>
+      <div class="grid-item"><a href="about.html"><img src="Images/abouticon.png" alt="About"></a></div>
+      <div class="grid-item"><a href="survey.html"><img src="Images/surveyicon.png" alt="Survey"></a></div>
+    </div>
+
+    <footer>
+      <img src="Images/footer.png" alt="Footer" usemap="#footer-map" class="responsive">
+      <map name="footer-map">
+        <area shape="rect" coords="0,0,200,100" href="mailto:info@example.com" alt="Email">
+        <area shape="rect" coords="200,0,400,100" href="https://example.com" alt="Website">
+      </map>
+    </footer>
   </div>
+
+  <script>
+    // Placeholder logic for rendering charts and counting responses
+    document.getElementById('responseCount').innerText = 'Loading response count...';
+    // Add your Google Sheets/Chart.js logic here
+  </script>
 </body>
 </html>
