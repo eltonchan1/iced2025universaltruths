@@ -92,13 +92,17 @@
     }
 
     .charts-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 40px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px 20px;
+      justify-items: center;
+      align-items: start;
       margin: 40px auto;
+      padding: 0 20px;
       max-width: 1200px;
+      box-sizing: border-box;
     }
+
 
     .chart-wrapper {
       background: rgba(0, 0, 0, 0.4);
