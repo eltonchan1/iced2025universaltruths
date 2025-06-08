@@ -164,20 +164,13 @@
     footer {
       margin-top: 40px;
     }  
-    .nav-table img {
-      width: 146px;
-      height: auto;
-      display: block;
-    }
     .nav-table {
       display: flex;
       justify-content: center;
-      align-items: center;
-      gap: 0;
-      padding: 0;
+      flex-wrap: wrap;
+      gap: 24px;            /* matches your desktop spacing */
       margin: 0 auto;
-      border-spacing: 0;
-      border-collapse: collapse;
+      padding: 0;
     }
     
     .nav-table td {
@@ -185,7 +178,12 @@
       margin: 0;
     }
     
-
+    .nav-table img {
+      width: 160px;         /* desktop size from survey.html */
+      max-width: 25vw;      /* makes images adapt on mobile */
+      height: auto;
+      display: block;
+    }
   </style>
 </head>
 <body>
