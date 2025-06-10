@@ -54,10 +54,14 @@
       margin: 0;
       padding: 0;
       text-align: center;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5, h6, p, a {
+      color: #FFFFFF;
     }
 
     a {
-      color: #FFFFFF;
       text-decoration: none;
     }
 
@@ -74,15 +78,24 @@
     img.responsive {
       width: 100%;
       height: auto;
+      display: block;
+      transition: transform 1s ease-in-out;
+      animation: fadeIn 1.2s ease-in-out forwards;
     }
 
     .nav-table {
       width: 100%;
       border-spacing: 0;
+      animation: slideDown 0.8s ease-in-out forwards;
     }
 
     .nav-table td {
       padding: 0 5px;
+      transition: transform 0.3s;
+    }
+
+    .nav-table td:hover {
+      transform: scale(1.1);
     }
 
     .nav-table img {
@@ -92,6 +105,21 @@
       height: auto;
     }
 
+    @media (max-width: 768px) {
+      .nav-table a img {
+        width: 100px;
+        height: auto;
+      }
+    }
+
+    h1 {
+      animation: fadeIn 1.4s ease-in-out forwards;
+    }
+
+    h3#responseCount {
+      animation: fadeIn 1.6s ease-in-out forwards;
+    }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -99,6 +127,16 @@
       align-items: start;
       justify-items: center;
       margin: 40px 0;
+      animation: fadeIn 1.5s ease-in;
+    }
+
+    .grid-item {
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .grid-item:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
     }
 
     .grid-item img {
@@ -124,6 +162,7 @@
       gap: 40px;
       margin: 40px auto;
       max-width: 1200px;
+      animation: fadeIn 1.8s ease-in-out forwards;
     }
 
     .chart-wrapper {
@@ -133,6 +172,14 @@
       max-width: 400px;
       width: 100%;
       box-sizing: border-box;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      animation: slideUp 0.6s ease-in-out forwards;
+      opacity: 0;
+    }
+
+    .chart-wrapper:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
     }
 
     .chart-title {
@@ -185,11 +232,45 @@
       display: block;
       margin: 10px auto;
       border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .glass-image:hover {
+      transform: scale(1.05);
     }
 
     footer {
       margin-top: 40px;
+      animation: fadeIn 2s ease-in;
     }
+
+    /* Animations */
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideDown {
+      0% { opacity: 0; transform: translateY(-40px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Staggered animation for chart wrappers */
+    .chart-wrapper:nth-child(1) { animation-delay: 0.1s; }
+    .chart-wrapper:nth-child(2) { animation-delay: 0.2s; }
+    .chart-wrapper:nth-child(3) { animation-delay: 0.3s; }
+    .chart-wrapper:nth-child(4) { animation-delay: 0.4s; }
+    .chart-wrapper:nth-child(5) { animation-delay: 0.5s; }
+    .chart-wrapper:nth-child(6) { animation-delay: 0.6s; }
+    .chart-wrapper:nth-child(7) { animation-delay: 0.7s; }
+    .chart-wrapper:nth-child(8) { animation-delay: 0.8s; }
+    .chart-wrapper:nth-child(9) { animation-delay: 0.9s; }
+    .chart-wrapper:nth-child(10) { animation-delay: 1s; }
   </style>
 </head>
 <body onLoad="MM_preloadImages('Images/homeon.png','Images/abouton.png','Images/resultson.png','Images/surveyon.png')">
