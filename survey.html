@@ -147,13 +147,52 @@
       padding: 0 10px;
     }
 
+    /* Reduced spacing for title */
+    h1 {
+      margin: 20px 0 10px 0;
+      animation: fadeIn 1.4s ease-in-out forwards;
+    }
+
+    /* Survey Section Styles - matching index.html copy-section */
+    .survey-section {
+      margin: 20px 0 60px 0;
+      padding: 30px;
+      animation: fadeIn 1.8s ease-in-out forwards;
+    }
+
+    .survey-section h2 {
+      margin-bottom: 20px;
+      font-size: 2em;
+    }
+
+    .survey-section p {
+      margin-bottom: 25px;
+      font-size: 1.1em;
+      opacity: 0.9;
+    }
+
+    .survey-link {
+      display: inline-block;
+      padding: 15px 30px;
+      background: #7d7d7d;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 25px;
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.3s;
+      text-decoration: none;
+    }
+
+    .survey-link:hover {
+      transform: scale(1.1);
+      text-decoration: none;
+    }
+
     footer {
       margin-top: 40px;
       animation: fadeIn 2s ease-in;
-    }
-
-    h1 {
-      animation: fadeIn 1.4s ease-in-out forwards;
     }
 
     p {
@@ -200,10 +239,16 @@
     <img src="Images/hero image.png" alt="Hero" class="responsive">
 
     <h1>Take the survey here!</h1>
-    <p>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSc3th9ICOlK5Ob-6Y3sxbJMXkPmQHDXdZTs-3N02eBvQRNMdQ/viewform?usp=dialog" target="_blank">Take the survey here!</a>
-    </p>
-    <a href="https://forms.gle/Gygf6kf2KNW5NR2k7" target="_blank"><img src="Images/qr-code-survey.png" alt="QR Code" class="responsive qr-code"></a>
+    
+    <!-- Survey Section -->
+    <div class="survey-section">
+      <h2>Participate in Our Research</h2>
+      <p>Help us understand universal truths by taking our survey!</p>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSc3th9ICOlK5Ob-6Y3sxbJMXkPmQHDXdZTs-3N02eBvQRNMdQ/viewform?usp=dialog" target="_blank" class="survey-link">
+        Take the Survey Here!
+      </a>
+      <a href="https://forms.gle/Gygf6kf2KNW5NR2k7" target="_blank"><img src="Images/qr-code-survey.png" alt="QR Code" class="responsive qr-code"></a>
+    </div>
 
     <!-- Grid Section -->
     <div class="grid">
