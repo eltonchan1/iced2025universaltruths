@@ -87,6 +87,8 @@
 
     .nav-table img {
       width: 146px;
+      height: 50px;
+      max-width: 100%;
       height: auto;
     }
 
@@ -104,6 +106,15 @@
       height: 200px;
       object-fit: cover;
       border-radius: 8px;
+    }
+
+    .grid-item h2 {
+      margin: 10px 0 5px;
+    }
+
+    .grid-item p {
+      margin: 0;
+      padding: 0 10px;
     }
 
     .charts-container {
@@ -181,7 +192,7 @@
     }
   </style>
 </head>
-<body>
+<body onLoad="MM_preloadImages('Images/homeon.png','Images/abouton.png','Images/resultson.png','Images/surveyon.png')">
   <div class="container">
     <img src="Images/header.png" alt="Header" class="responsive">
     <table class="nav-table">
