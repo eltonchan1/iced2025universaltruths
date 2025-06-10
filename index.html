@@ -153,6 +153,19 @@
       animation: shake 0.5s ease-in-out;
     }
 
+    .qr-code {
+      max-width: 300px;
+      margin: 20px auto;
+      display: block;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      animation: fadeIn 1.8s ease-in-out forwards;
+    }
+
+    .qr-code:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+    }
+
     @keyframes pulse {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.02); }
@@ -344,10 +357,11 @@
     <!-- Copy Link Section -->
     <div class="copy-section">
       <h2>Share This Website</h2>
-      <p>Help spread the word about our Universal Truths research project!</p>
+      <p>Help spread the word about this project!</p>
       <button class="copy-link" onclick="copyToClipboard('https://eltonchan1.github.io/iced2025universaltruths', this)">
-        📋 Copy Website Link
+        Copy Website Link!
       </button>
+      <a href="https://eltonchan1.github.io/iced2025universaltruths" target="_blank"><img src="Images/qr-code-website.png" alt="QR Code" class="responsive qr-code"></a>
     </div>
 
     <!-- Footer -->
