@@ -2,7 +2,6 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ICED 2025: Survey Results</title>
   <script type="text/javascript">
     function MM_swapImgRestore() {
@@ -44,6 +43,7 @@
         }
     }
   </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
@@ -87,31 +87,9 @@
 
     .nav-table img {
       width: 146px;
+      height: 50px;
+      max-width: 100%;
       height: auto;
-    }
-
-    .mobile-nav {
-      display: none;
-    }
-
-    @media screen and (max-width: 600px) {
-      .nav-table {
-        display: none;
-      }
-      .mobile-nav {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 4px;
-        padding: 10px;
-      }
-      .mobile-nav a img {
-        width: 80px;
-        height: auto;
-      }
-      .container {
-        padding: 10px;
-      }
     }
 
     .grid {
@@ -128,6 +106,15 @@
       height: 200px;
       object-fit: cover;
       border-radius: 8px;
+    }
+
+    .grid-item h2 {
+      margin: 10px 0 5px;
+    }
+
+    .grid-item p {
+      margin: 0;
+      padding: 0 10px;
     }
 
     .charts-container {
@@ -205,7 +192,7 @@
     }
   </style>
 </head>
-<body>
+<body onLoad="MM_preloadImages('Images/homeon.png','Images/abouton.png','Images/resultson.png','Images/surveyon.png')">
   <div class="container">
     <img src="Images/header.png" alt="Header" class="responsive">
     <table class="nav-table">
@@ -216,15 +203,145 @@
         <td><a href="results.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image6','','Images/resultson.png',1)"><img src="Images/resultsoff.png" alt="Results" id="Image6"></a></td>
       </tr>
     </table>
-    <div class="mobile-nav">
-      <a href="index.html"><img src="Images/homeoff.png" alt="Home"></a>
-      <a href="about.html"><img src="Images/aboutoff.png" alt="About"></a>
-      <a href="survey.html"><img src="Images/surveyoff.png" alt="Survey"></a>
-      <a href="results.html"><img src="Images/resultsoff.png" alt="Results"></a>
+
+    <img src="Images/hero image.png" alt="Hero" class="responsive">
+
+    <h1>Results of the survey!</h1>
+    <h3 id="responseCount"></h3>
+
+    <div id="chartsContainer" class="charts-container"></div>
+
+    <div class="grid">
+      <div class="grid-item">
+        <a href="about.html"><img src="Images/world200.png" alt="About"></a>
+        <a href="about.html">
+          <h2>About Us</h2>
+          <p>Who are we and why did we do this? </p>
+        </a>
+      </div>
+      <div class="grid-item">
+        <a href="survey.html"><img src="Images/survey200.png" alt="Survey"></a>
+        <a href="survey.html">
+          <h2>Take the Survey</h2>
+          <p>Take our survey to help support our research!</p>
+        </a>
+      </div>
     </div>
 
-    <!-- Charts and response content goes here -->
-
+    <footer>
+      <img src="Images/footer.png" alt="Footer" class="responsive" usemap="#Map">
+      <map name="Map">
+        <area shape="circle" coords="498,79,27" href="https://docs.google.com/forms/d/e/1FAIpQLSc3th9ICOlK5Ob-6Y3sxbJMXkPmQHDXdZTs-3N02eBvQRNMdQ/viewform" target="_blank">
+        <area shape="circle" coords="704,80,25" href="https://www.instagram.com/universaltruths.2025/" target="_blank">
+      </map>
+    </footer>
   </div>
+
+  <script>
+    const SHEET_ID = '1iBmJhzh4XKOxyfN8jNdtVAFqrlGccsn9UAjbeQD_UtA';
+    const API_KEY = 'AIzaSyB4Kvq4D4lUtuH_Ddo1moAeB5K2FbwIMyc';
+    const RANGE = 'Form Responses 1';
+
+    async function fetchData() {
+      const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent(RANGE)}?key=${API_KEY}`;
+      const res = await fetch(url);
+      const data = await res.json();
+
+      if (!data.values || data.values.length <= 1) {
+        document.getElementById("chartsContainer").innerHTML = "<p>No data found</p>";
+        return;
+      }
+
+      const [headers, ...rows] = data.values;
+      document.getElementById("responseCount").textContent = `${rows.length} people have filled out the survey.`;
+
+      const chartsContainer = document.getElementById("chartsContainer");
+
+      for (let col = 1; col < headers.length; col++) {
+        const question = headers[col];
+        const counts = {};
+        for (let row of rows) {
+          const answer = row[col] || "(Blank)";
+          counts[answer] = (counts[answer] || 0) + 1;
+        }
+
+        const wrapper = document.createElement("div");
+        wrapper.className = "chart-wrapper";
+
+        const title = document.createElement("div");
+        title.className = "chart-title";
+        title.textContent = question;
+        wrapper.appendChild(title);
+
+        const qText = question.toLowerCase();
+
+        if (qText.includes("half full") || qText.includes("half empty")) {
+          const img = document.createElement("img");
+          img.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Glass-of-water.jpg/800px-Glass-of-water.jpg";
+          img.alt = "Half Full Glass";
+          img.className = "glass-image";
+          wrapper.appendChild(img);
+        }
+
+        if (qText.includes("what do you think this is")) {
+          const img = document.createElement("img");
+          img.src = "https://media.istockphoto.com/id/1408532022/vector/cheerful-smiley-face-icon-emotion-black-contour-line-sketch-drawing-vector-simple-flat.jpg?s=612x612&w=0&k=20&c=ALCDsBgJO1agZk9ghoVxvCRE-i3dEMmDegD0kUdhd04=";
+          img.alt = "Smiley Face";
+          img.className = "glass-image";
+          wrapper.appendChild(img);
+        }
+
+        const canvas = document.createElement('canvas');
+        wrapper.appendChild(canvas);
+
+        const labels = Object.keys(counts);
+        const values = Object.values(counts);
+        const showLegend = labels.length <= 6;
+
+        new Chart(canvas.getContext('2d'), {
+          type: 'pie',
+          data: {
+            labels: labels,
+            datasets: [{
+              data: values,
+              backgroundColor: [
+                '#FF6384', '#36A2EB', '#FFCE56',
+                '#4BC0C0', '#9966FF', '#FF9F40',
+                '#66FF66', '#FF6666', '#A52A2A',
+                '#00CED1', '#DA70D6', '#FFD700'
+              ]
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              title: { display: false },
+              legend: {
+                display: showLegend,
+                labels: {
+                  color: '#FFFFFF'
+                }
+              }
+            }
+          }
+        });
+
+        if (!showLegend) {
+          const list = document.createElement("ul");
+          list.className = "chart-list";
+          for (let i = 0; i < labels.length; i++) {
+            const li = document.createElement("li");
+            li.textContent = `${labels[i]}: ${values[i]}`;
+            list.appendChild(li);
+          }
+          wrapper.appendChild(list);
+        }
+
+        chartsContainer.appendChild(wrapper);
+      }
+    }
+
+    fetchData();
+  </script>
 </body>
 </html>
