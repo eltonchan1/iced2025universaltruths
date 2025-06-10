@@ -106,6 +106,68 @@
       padding: 0 10px;
     }
 
+    /* Copy Link Section Styles */
+    .copy-section {
+      margin: 60px 0;
+      padding: 30px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      animation: fadeIn 1.8s ease-in-out forwards;
+    }
+
+    .copy-section h2 {
+      margin-bottom: 20px;
+      font-size: 2em;
+    }
+
+    .copy-section p {
+      margin-bottom: 25px;
+      font-size: 1.1em;
+      opacity: 0.9;
+    }
+
+    .copy-link {
+      display: inline-block;
+      padding: 15px 30px;
+      background: #7d7d7d;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 25px;
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.3s;
+      text-decoration: none;
+    }
+
+    .copy-link:hover {
+      transform: scale(1.1);
+      text-decoration: none;
+    }
+
+    .copy-link.success {
+      background: linear-gradient(45deg, #56ab2f 0%, #a8e6cf 100%);
+      animation: none;
+    }
+
+    .copy-link.error {
+      background: linear-gradient(45deg, #ff416c 0%, #ff4b2b 100%);
+      animation: shake 0.5s ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
     footer {
       margin-top: 40px;
       animation: fadeIn 2s ease-in;
@@ -170,6 +232,77 @@
           x.src = a[i + 2];
         }
     }
+
+    // Combined copy-to-clipboard function
+    async function copyToClipboard(text, element) {
+      const originalText = element.textContent;
+      const originalClass = element.className;
+      
+      try {
+        // Method 1: Modern Clipboard API
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          showSuccess(element, originalText, originalClass);
+          return;
+        }
+        
+        // Method 2: Fallback using document.execCommand
+        if (document.execCommand) {
+          const textarea = document.createElement('textarea');
+          textarea.value = text;
+          textarea.style.position = 'fixed';
+          textarea.style.left = '-999999px';
+          textarea.style.top = '-999999px';
+          document.body.appendChild(textarea);
+          
+          textarea.focus();
+          textarea.select();
+          
+          const successful = document.execCommand('copy');
+          document.body.removeChild(textarea);
+          
+          if (successful) {
+            showSuccess(element, originalText, originalClass);
+            return;
+          }
+        }
+        
+        // Method 3: Manual fallback
+        throw new Error('Clipboard API not supported');
+        
+      } catch (err) {
+        console.error('Copy failed:', err);
+        showError(element, originalText, originalClass, text);
+      }
+    }
+    
+    function showSuccess(element, originalText, originalClass) {
+      element.textContent = '✅ Link Copied!';
+      element.className = originalClass.replace(/\b(success|error)\b/g, '') + ' success';
+      
+      setTimeout(() => {
+        element.textContent = originalText;
+        element.className = originalClass;
+      }, 2500);
+    }
+    
+    function showError(element, originalText, originalClass, text) {
+      element.textContent = '❌ Copy Failed';
+      element.className = originalClass.replace(/\b(success|error)\b/g, '') + ' error';
+      
+      setTimeout(() => {
+        const userChoice = confirm(
+          'Automatic copy failed. Would you like to see the link to copy manually?'
+        );
+        
+        if (userChoice) {
+          prompt('Please copy this link manually:', text);
+        }
+        
+        element.textContent = originalText;
+        element.className = originalClass;
+      }, 1500);
+    }
   </script>
 </head>
 <body onLoad="MM_preloadImages('Images/homeon.png','Images/abouton.png','Images/resultson.png','Images/surveyon.png')">
@@ -210,6 +343,15 @@
           <p>What were the results of the survey?</p>
         </a>
       </div>
+    </div>
+
+    <!-- Copy Link Section -->
+    <div class="copy-section">
+      <h2>Share This Website</h2>
+      <p>Help spread the word about our Universal Truths research project!</p>
+      <button class="copy-link" onclick="copyToClipboard('https://eltonchan1.github.io/iced2025universaltruths', this)">
+        📋 Copy Website Link
+      </button>
     </div>
 
     <!-- Footer -->
