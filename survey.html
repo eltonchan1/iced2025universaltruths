@@ -54,6 +54,11 @@
       margin: 0;
       padding: 0;
       text-align: center;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5, h6, p, a {
+      color: #FFFFFF;
     }
 
     a {
@@ -74,15 +79,24 @@
     img.responsive {
       width: 100%;
       height: auto;
+      display: block;
+      transition: transform 1s ease-in-out;
+      animation: fadeIn 1.2s ease-in-out forwards;
     }
 
     .nav-table {
       width: 100%;
       border-spacing: 0;
+      animation: slideDown 0.8s ease-in-out forwards;
     }
 
     .nav-table td {
       padding: 0 5px;
+      transition: transform 0.3s;
+    }
+
+    .nav-table td:hover {
+      transform: scale(1.1);
     }
 
     .nav-table img {
@@ -92,6 +106,12 @@
       height: auto;
     }
 
+    @media (max-width: 768px) {
+      .nav-table a img {
+        width: 100px;
+      }
+    }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -99,6 +119,16 @@
       align-items: start;
       justify-items: center;
       margin: 40px 0;
+      animation: fadeIn 1.5s ease-in;
+    }
+
+    .grid-item {
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .grid-item:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
     }
 
     .grid-item img {
@@ -119,6 +149,39 @@
 
     footer {
       margin-top: 40px;
+      animation: fadeIn 2s ease-in;
+    }
+
+    h1 {
+      animation: fadeIn 1.4s ease-in-out forwards;
+    }
+
+    p {
+      animation: fadeIn 1.6s ease-in-out forwards;
+    }
+
+    .qr-code {
+      max-width: 300px;
+      margin: 20px auto;
+      display: block;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      animation: fadeIn 1.8s ease-in-out forwards;
+    }
+
+    .qr-code:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideDown {
+      0% { opacity: 0; transform: translateY(-40px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -127,7 +190,7 @@
     <img src="Images/header.png" alt="Header" class="responsive">
     <table class="nav-table">
       <tr>
-        <td><a href="index.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image3','','Images/homeon.png',1)"><img src="Images/homeoff.png" alt="Home" id="Image3"></a></td>
+        <td><a href="index.html" onMouseOut="MM_swapImsgRestore()" onMouseOver="MM_swapImage('Image3','','Images/homeon.png',1)"><img src="Images/homeoff.png" alt="Home" id="Image3"></a></td>
         <td><a href="about.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image7','','Images/abouton.png',1)"><img src="Images/aboutoff.png" alt="About" id="Image7"></a></td>
         <td><a href="survey.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image10','','Images/surveyon.png',1)"><img src="Images/surveyoff.png" alt="Survey" id="Image10"></a></td>
         <td><a href="results.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image6','','Images/resultson.png',1)"><img src="Images/resultsoff.png" alt="Results" id="Image6"></a></td>
@@ -140,7 +203,7 @@
     <p>
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSc3th9ICOlK5Ob-6Y3sxbJMXkPmQHDXdZTs-3N02eBvQRNMdQ/viewform?usp=dialog" target="_blank">Take the survey here!</a>
     </p>
-    <a href="https://forms.gle/Gygf6kf2KNW5NR2k7" target="_blank"><img src="Images/qr-code.png" alt="QR Code" class="responsive" style="max-width: 300px;"></a>
+    <a href="https://forms.gle/Gygf6kf2KNW5NR2k7" target="_blank"><img src="Images/qr-code.png" alt="QR Code" class="responsive qr-code"></a>
 
     <!-- Grid Section -->
     <div class="grid">
@@ -152,8 +215,8 @@
         </a>
       </div>
       <div class="grid-item">
-        <a href="survey.html"><img src="Images/results200.png" alt="Results"></a>
-        <a href="survey.html">
+        <a href="results.html"><img src="Images/results200.png" alt="Results"></a>
+        <a href="results.html">
           <h2>Survey Results</h2>
           <p>What were the results of the survey?</p>
         </a>
