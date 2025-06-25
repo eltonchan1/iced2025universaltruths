@@ -12,3 +12,4 @@ This website was made to share our survey as well as the results of it.
 <br>
 Thank you to everyone that completed the survey and we hope you learn something new from our results!
 <br>
+this was vibe coded with chatgpt and claude, i have no real good coding skills
